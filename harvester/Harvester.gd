@@ -7,6 +7,7 @@ extends Node2D
 
 export var speed = 300
 export var player_path: NodePath
+export var horizontal = true
 
 onready var player = get_node(player_path)
 
@@ -14,7 +15,8 @@ var direction = Vector2.RIGHT
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    pass # Replace with function body.
+    if !horizontal:
+        direction = Vector2.UP
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +29,11 @@ func _physics_process(delta: float) -> void:
         direction = Vector2.LEFT
     elif position.x < -1000:
         direction = Vector2.RIGHT
+
+    if position.y > 1000:
+        direction = Vector2.UP
+    elif position.y < -1000:
+        direction = Vector2.DOWN
 
     var velocity = direction
 

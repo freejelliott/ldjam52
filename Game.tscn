@@ -45,3 +45,8 @@ position = Vector2( 834, 370 )
 
 [node name="Pickup7" parent="." instance=ExtResource( 2 )]
 position = Vector2( 711, 477 )
+
+[node name="Harvester2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 574, -13 )
+player_path = NodePath("../Player")
+horizontal = false
