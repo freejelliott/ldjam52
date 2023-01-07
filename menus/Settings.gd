@@ -2,6 +2,7 @@ extends Control
 
 signal close_settings
 signal open_settings
+signal volume_changed(volume)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('settings'):
@@ -13,6 +14,5 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_CloseSettingsButton_pressed() -> void:
     emit_signal('close_settings')
 
-
-func _on_ChangeSettingButton_pressed() -> void:
-    pass
+func _on_VolumeSlider_value_changed(value:float) -> void:
+	emit_signal('volume_changed', value)

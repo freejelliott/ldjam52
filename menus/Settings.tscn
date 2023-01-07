@@ -11,25 +11,13 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 anchor_right = 1.0
 margin_top = 16.0
 margin_bottom = 47.0
 text = "Settings
 "
 align = 1
-
-[node name="ChangeSettingButton" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -101.5
-margin_top = -47.0
-margin_right = 101.5
-margin_bottom = 47.0
-rect_pivot_offset = Vector2( 216.5, 108 )
-text = "Change a setting"
 
 [node name="CloseSettingsButton" type="Button" parent="."]
 anchor_left = 1.0
@@ -41,5 +29,20 @@ margin_bottom = 63.0
 rect_pivot_offset = Vector2( 216.5, 108 )
 text = "Close"
 
-[connection signal="pressed" from="ChangeSettingButton" to="." method="_on_ChangeSettingButton_pressed"]
+[node name="VolumeSlider" type="HSlider" parent="."]
+margin_left = 496.0
+margin_top = 220.0
+margin_right = 792.0
+margin_bottom = 268.0
+min_value = -50.0
+max_value = 50.0
+
+[node name="VolumeLabel" type="Label" parent="."]
+margin_left = 424.0
+margin_top = 237.0
+margin_right = 473.0
+margin_bottom = 251.0
+text = "Volume"
+
 [connection signal="pressed" from="CloseSettingsButton" to="." method="_on_CloseSettingsButton_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]

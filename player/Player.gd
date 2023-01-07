@@ -34,6 +34,8 @@ func drop_vegetable(vegetable_to_drop: Node2D):
     # TODO: inefficient to pop from the front multiple tiems.
     while true:
         var dropped_vegetable = vegetables.pop_front()
+        if !dropped_vegetable:
+            return
         dropped_vegetable.queue_free()
         if dropped_vegetable == vegetable_to_drop:
             return

@@ -135,6 +135,7 @@ autostart = true
 [node name="HealthUI" parent="PlayScreen/HUD" instance=ExtResource( 2 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 14 )
 autoplay = true
 
@@ -143,5 +144,6 @@ autoplay = true
 [connection signal="restart_game" from="Menus/GameOver" to="." method="_on_GameOver_restart_game"]
 [connection signal="close_settings" from="Menus/Settings" to="." method="_on_Settings_close_settings"]
 [connection signal="open_settings" from="Menus/Settings" to="." method="_on_Settings_open_settings"]
+[connection signal="volume_changed" from="Menus/Settings" to="." method="_on_Settings_volume_changed"]
 [connection signal="no_lives" from="PlayScreen/Den" to="." method="_on_Den_no_lives"]
 [connection signal="timeout" from="PlayScreen/VegetableSpawnTimer" to="." method="_on_VegetableSpawnTimer_timeout"]

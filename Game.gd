@@ -12,6 +12,7 @@ onready var game_over = $Menus/GameOver
 onready var play_screen = $PlayScreen
 onready var field = $PlayScreen/Field
 onready var hud = $PlayScreen/HUD
+onready var audio_player = $AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -84,3 +85,6 @@ func _on_MainMenu_open_settings() -> void:
     settings.visible = true
     play_screen.get_tree().paused = true
     hud.visible = false
+
+func _on_Settings_volume_changed(volume:float) -> void:
+    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume)
