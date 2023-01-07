@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://healthSystem/HealthUI.tscn" type="PackedScene" id=2]
@@ -79,6 +79,9 @@ points = PoolVector2Array( 0, 60, 200, 60, 200, 140, 0, 140 )
 } ]
 2/z_index = 0
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 24.0
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -117,9 +120,21 @@ position = Vector2( 429, 360 )
 player_path = NodePath("../Player")
 
 [node name="Hunter" parent="PlayScreen" instance=ExtResource( 5 )]
-position = Vector2( 552, 289 )
+position = Vector2( 237, 213 )
 speed = 100
 player_path = NodePath("../Player")
+home_path = NodePath("../HunterHome")
+
+[node name="HunterHome" type="Position2D" parent="PlayScreen"]
+position = Vector2( 237, 214 )
+
+[node name="Area2D" type="Area2D" parent="PlayScreen/HunterHome"]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayScreen/HunterHome/Area2D"]
+shape = SubResource( 4 )
 
 [node name="Harvester2" parent="PlayScreen" instance=ExtResource( 4 )]
 position = Vector2( 905, 234 )

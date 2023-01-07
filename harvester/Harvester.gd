@@ -40,9 +40,7 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
     elif area.collision_layer == 1 << 2:
         # Hunter
         var hunter = area.get_parent()
-        # TODO: spawn a new hunter
-        # TODO: stun the hunter instead for a while?
-        hunter.queue_free()
+        hunter.stun()
     elif area.collision_layer == 1 << 3:
         # Vegetable held by player
         var vegetable = area.get_parent()
