@@ -86,46 +86,46 @@ format = 1
 script = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 300 )
+position = Vector2( 843, 547 )
 
 [node name="Den" parent="." instance=ExtResource( 3 )]
-position = Vector2( 874, 169 )
+position = Vector2( 1205, 416 )
 
 [node name="Harvester" parent="." instance=ExtResource( 4 )]
-position = Vector2( 98, 113 )
+position = Vector2( 429, 360 )
 player_path = NodePath("../Player")
 
 [node name="Hunter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 221, 42 )
+position = Vector2( 552, 289 )
 speed = 100
 player_path = NodePath("../Player")
 
 [node name="Harvester2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 574, -13 )
+position = Vector2( 905, 234 )
 player_path = NodePath("../Player")
 horizontal = false
 
 [node name="Tomato" parent="." instance=ExtResource( 2 )]
-position = Vector2( 62, 498 )
+position = Vector2( 393, 745 )
 
 [node name="Tomato2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 619, 497 )
+position = Vector2( 950, 744 )
 
 [node name="Tomato3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 515, 501 )
+position = Vector2( 846, 748 )
 
 [node name="Carrot" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416, 503 )
+position = Vector2( 747, 750 )
 vegetable_type = 1
 
 [node name="Carrot2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 326, 493 )
+position = Vector2( 657, 740 )
 vegetable_type = 1
 
 [node name="Potato" parent="." instance=ExtResource( 2 )]
-position = Vector2( 236, 498 )
+position = Vector2( 567, 745 )
 vegetable_type = 2
 
 [node name="Potato2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 152, 493 )
+position = Vector2( 483, 740 )
 vegetable_type = 2

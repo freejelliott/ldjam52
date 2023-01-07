@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://harvester/Harvester.gd" type="Script" id=1]
 
@@ -13,7 +13,12 @@ width = 50
 [sub_resource type="CircleShape2D" id=5]
 radius = 25.02
 
-[node name="Harvester" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 25.5, 26 )
+
+[node name="Harvester" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 16
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -27,5 +32,9 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 6 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

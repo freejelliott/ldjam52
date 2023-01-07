@@ -57,9 +57,9 @@ move_down={
 [layer_names]
 
 2d_physics/layer_1="player"
-2d_physics/layer_2="items"
+2d_physics/layer_2="vegetables"
 2d_physics/layer_3="enemies"
-2d_physics/layer_4="following_items"
+2d_physics/layer_4="following_vegetables"
 2d_physics/layer_5="fence"
 
 [physics]

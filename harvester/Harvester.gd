@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 
 # Declare member variables here. Examples:
@@ -24,19 +24,18 @@ func _ready() -> void:
 #    pass
 
 func _physics_process(delta: float) -> void:
-    if position.x > 1000:
-        direction = Vector2.LEFT
-    elif position.x < -1000:
-        direction = Vector2.RIGHT
+    var collision = move_and_collide(direction * speed * delta)
 
-    if position.y > 1000:
-        direction = Vector2.UP
-    elif position.y < -1000:
-        direction = Vector2.DOWN
+    if collision:
+        if direction == Vector2.RIGHT:
+            direction = Vector2.LEFT
+        elif direction == Vector2.LEFT:
+            direction = Vector2.RIGHT
+        elif direction == Vector2.UP:
+            direction = Vector2.DOWN
+        elif direction == Vector2.DOWN:
+            direction = Vector2.UP
 
-    var velocity = direction
-
-    position += velocity * speed * delta
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:

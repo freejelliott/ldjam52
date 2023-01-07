@@ -31,7 +31,6 @@ func _ready() -> void:
             color = Color(0.554688, 0.361932, 0.136505)
         VegetableType.Tomato:
             color = Color(0.757813, 0.023682, 0.247362)
-    print(color)
 
     gradient.gradient.colors[0] = color
 
