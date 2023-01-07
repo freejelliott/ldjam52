@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
+[ext_resource path="res://tomato.png" type="Texture" id=2]
+[ext_resource path="res://carrot.png" type="Texture" id=3]
+[ext_resource path="res://potato.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.450262 )
@@ -31,6 +34,21 @@ gradient = SubResource( 7 )
 width = 32
 height = 32
 
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 30, 20, 320, 310 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 50, 50, 270, 280 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 40, 40, 310, 320 )
+
 [node name="Den" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -44,6 +62,7 @@ one_shot = true
 autostart = true
 
 [node name="RequestTimer" type="Timer" parent="."]
+wait_time = 30.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -59,31 +78,60 @@ margin_top = -186.0
 margin_right = 65.0
 margin_bottom = -35.0
 
-[node name="PanelContainer" type="PanelContainer" parent="Request"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="TextureProgress" type="TextureProgress" parent="Request"]
-margin_left = 9.0
-margin_top = 8.0
-margin_right = 41.0
-margin_bottom = 40.0
+margin_left = 50.0
+margin_top = 111.0
+margin_right = 82.0
+margin_bottom = 143.0
 texture_under = SubResource( 6 )
 texture_progress = SubResource( 8 )
 fill_mode = 4
 
-[node name="Label" type="Label" parent="Request"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -55.0
-margin_top = -23.5
-margin_right = 63.0
-margin_bottom = 24.5
-text = "potato: 2
-tomato: 1
-carrot: 3"
+[node name="HBoxContainer" type="HBoxContainer" parent="Request"]
+margin_left = -143.0
+margin_top = 43.0
+margin_right = 275.0
+margin_bottom = 100.0
+alignment = 1
+
+[node name="TemplateTomato" type="TextureRect" parent="Request/HBoxContainer"]
+visible = false
+margin_left = 184.0
+margin_top = 3.0
+margin_right = 234.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource( 9 )
+expand = true
+stretch_mode = 2
+
+[node name="TemplatePotato" type="TextureRect" parent="Request/HBoxContainer"]
+visible = false
+margin_left = 184.0
+margin_top = 3.0
+margin_right = 234.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource( 10 )
+expand = true
+stretch_mode = 2
+
+[node name="TemplateCarrot" type="TextureRect" parent="Request/HBoxContainer"]
+visible = false
+margin_left = 184.0
+margin_top = 3.0
+margin_right = 234.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 2
 
 [node name="Health" type="Control" parent="."]
 margin_left = -48.0

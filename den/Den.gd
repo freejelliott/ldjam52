@@ -9,6 +9,10 @@ onready var new_request_timer: Timer = $NewRequestTimer
 onready var request: Control = $Request
 onready var request_label: Label = $Request/Label
 onready var request_progress: TextureProgress = $Request/TextureProgress
+onready var request_container: HBoxContainer = $Request/HBoxContainer
+onready var template_tomato : TextureRect = $Request/HBoxContainer/TemplateTomato
+onready var template_potato : TextureRect = $Request/HBoxContainer/TemplatePotato
+onready var template_carrot : TextureRect = $Request/HBoxContainer/TemplateCarrot
 onready var health_bar : Label = $Health/Label
 
 export var max_lives = 3
@@ -21,6 +25,8 @@ var requested_vegetables: Dictionary = {}
 func _ready() -> void:
     request.visible = false
     health_bar.text = 'Lives: %d' % lives
+    for child in request_container.get_children():
+        request_container.remove_child(child)
 
 
 func _process(delta: float) -> void:
@@ -57,10 +63,21 @@ func _on_NewRequestTimer_timeout() -> void:
         requested_vegetables[Vegetable.VegetableType.values()[rand_range(0, Vegetable.VegetableType.size())]] += 1
     print('Den wants %s' % [requested_vegetables])
     request_timer.start()
-    request_label.text = ''
-    request_label.text += 'Potatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Potato]
-    request_label.text += 'Tomatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Tomato]
-    request_label.text += 'Carrots: %d' % requested_vegetables[Vegetable.VegetableType.Carrot]
+    for child in request_container.get_children():
+        request_container.remove_child(child)
+
+    for i in requested_vegetables[Vegetable.VegetableType.Potato]:
+        var icon = template_potato.duplicate()
+        icon.visible = true
+        request_container.add_child(icon)
+    for i in requested_vegetables[Vegetable.VegetableType.Tomato]:
+        var icon = template_tomato.duplicate()
+        icon.visible = true
+        request_container.add_child(icon)
+    for i in requested_vegetables[Vegetable.VegetableType.Carrot]:
+        var icon = template_carrot.duplicate()
+        icon.visible = true
+        request_container.add_child(icon)
     request.visible = true
 
 
