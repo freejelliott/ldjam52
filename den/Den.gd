@@ -7,7 +7,6 @@ signal no_lives
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
 onready var request: Control = $Request
-onready var request_label: Label = $Request/Label
 onready var request_progress: TextureProgress = $Request/TextureProgress
 onready var request_container: HBoxContainer = $Request/HBoxContainer
 onready var template_tomato : TextureRect = $Request/HBoxContainer/TemplateTomato
