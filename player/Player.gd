@@ -5,8 +5,8 @@ extends RigidBody2D
 # var a: int = 2
 # var b: String = "text"
 
-# The first item in the array is furthest away from the player.
-var pickups: Array = []
+# The first vegetable in the array is furthest away from the player.
+var vegetables: Array = []
 
 export var force = 100
 
@@ -33,33 +33,33 @@ func _integrate_forces(state) -> void:
     exert = exert.normalized()
     applied_force = exert*force
 
-func get_last_item():
-    if pickups.empty():
+func get_last_vegetable():
+    if vegetables.empty():
         return null
-    return pickups.front()
+    return vegetables.front()
 
-func drop_item(item_to_drop: Node2D):
-    # TODO: could just drop the one item instead of it and all the items following it.
+func drop_vegetable(vegetable_to_drop: Node2D):
+    # TODO: could just drop the one vegetable instead of it and all the vegetables following it.
 
     # TODO: inefficient to pop from the front multiple tiems.
     while true:
-        var dropped_item = pickups.pop_front()
-        dropped_item.queue_free()
-        if dropped_item == item_to_drop:
+        var dropped_vegetable = vegetables.pop_front()
+        dropped_vegetable.queue_free()
+        if dropped_vegetable == vegetable_to_drop:
             return
 
-func drop_all_items():
-    for item in pickups:
-        item.queue_free()
-    pickups.clear()
+func drop_all_vegetables():
+    for vegetable in vegetables:
+        vegetable.queue_free()
+    vegetables.clear()
 
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
-    area.collision_layer = 1 << 3  # Put item on following_items layer so it isn't picked up again.
-    var pickup = area.get_parent()
+    area.collision_layer = 1 << 3  # Put vegetable on following_vegetables layer so it isn't picked up again.
+    var vegetable = area.get_parent()
 
-    pickup.set_follow_target(self)
-    if !pickups.empty():
-        pickups.back().set_follow_target(pickup)
+    vegetable.set_follow_target(self)
+    if !vegetables.empty():
+        vegetables.back().set_follow_target(vegetable)
 
-    pickups.append(pickup)
+    vegetables.append(vegetable)

@@ -27,9 +27,9 @@ func _physics_process(delta: float) -> void:
         # Don't move while eating.
         return
 
-    # Hunter follows the last item the player is carrying or stands still if
+    # Hunter follows the last vegetable the player is carrying or stands still if
     # nothing is being carried.
-    var follow_target = player.get_last_item()
+    var follow_target = player.get_last_vegetable()
     if follow_target:
         var velocity = follow_target.position - position
 
@@ -39,9 +39,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Area2D_area_entered(other_area:Area2D) -> void:
-    var item = other_area.get_parent()
+    var vegetable = other_area.get_parent()
     area.set_deferred('monitoring', false)
-    player.drop_item(item)
+    player.drop_vegetable(vegetable)
     eating_timer.start()
     print('hunter is eating')
 

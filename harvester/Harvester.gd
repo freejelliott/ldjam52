@@ -23,7 +23,6 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 #    pass
 
-
 func _physics_process(delta: float) -> void:
     if position.x > 1000:
         direction = Vector2.LEFT
@@ -42,11 +41,11 @@ func _physics_process(delta: float) -> void:
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
-        player.drop_all_items()
+        player.drop_all_vegetables()
     elif area.collision_layer == 1 << 1:
-        # Item on ground
-        var item = area.get_parent()
-        item.queue_free()
+        # Vegetable on ground
+        var vegetable = area.get_parent()
+        vegetable.queue_free()
     elif area.collision_layer == 1 << 2:
         # Hunter
         var hunter = area.get_parent()
@@ -54,6 +53,6 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         # TODO: stun the hunter instead for a while?
         hunter.queue_free()
     elif area.collision_layer == 1 << 3:
-        # Item held by player
-        var item = area.get_parent()
-        player.drop_item(item)
+        # Vegetable held by player
+        var vegetable = area.get_parent()
+        player.drop_vegetable(vegetable)
