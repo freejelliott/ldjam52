@@ -117,6 +117,7 @@ position = Vector2( 1205, 416 )
 
 [node name="Harvester" parent="PlayScreen" instance=ExtResource( 4 )]
 position = Vector2( 429, 360 )
+scale = Vector2( 0.4, 0.4 )
 player_path = NodePath("../Player")
 
 [node name="Hunter" parent="PlayScreen" instance=ExtResource( 5 )]
@@ -138,6 +139,7 @@ shape = SubResource( 4 )
 
 [node name="Harvester2" parent="PlayScreen" instance=ExtResource( 4 )]
 position = Vector2( 905, 234 )
+scale = Vector2( 0.5, 0.5 )
 player_path = NodePath("../Player")
 horizontal = false
 
@@ -160,5 +162,4 @@ autoplay = true
 [connection signal="close_settings" from="Menus/Settings" to="." method="_on_Settings_close_settings"]
 [connection signal="open_settings" from="Menus/Settings" to="." method="_on_Settings_open_settings"]
 [connection signal="volume_changed" from="Menus/Settings" to="." method="_on_Settings_volume_changed"]
-[connection signal="no_lives" from="PlayScreen/Den" to="." method="_on_Den_no_lives"]
 [connection signal="timeout" from="PlayScreen/VegetableSpawnTimer" to="." method="_on_VegetableSpawnTimer_timeout"]
