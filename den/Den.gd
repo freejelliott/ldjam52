@@ -19,6 +19,7 @@ export var max_lives = 3
 onready var lives = max_lives
 
 var requested_vegetables: Dictionary = {}
+var stats = PlayerStats
 
 
 func _ready() -> void:
@@ -101,6 +102,7 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         return
 
     print('Player brought correct vegetables')
+    stats.score += 1
 
     cancel_request()
     player.drop_all_vegetables()
