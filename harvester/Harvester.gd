@@ -10,6 +10,7 @@ export var player_path: NodePath
 export var horizontal = true
 
 onready var player = get_node(player_path)
+var stats = PlayerStats
 
 var direction = Vector2.RIGHT
 
@@ -41,6 +42,8 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
         player.drop_all_vegetables()
+        stats.health -= 1
+        print (stats.health)
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
         var vegetable = area.get_parent()
