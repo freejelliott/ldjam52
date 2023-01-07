@@ -43,12 +43,19 @@ func get_last_item():
     return pickups.front()
 
 func drop_item(item_to_drop: Node2D):
+    # TODO: could just drop the one item instead of it and all the items following it.
+
     # TODO: inefficient to pop from the front multiple tiems.
     while true:
         var dropped_item = pickups.pop_front()
         dropped_item.queue_free()
         if dropped_item == item_to_drop:
             return
+
+func drop_all_items():
+    for item in pickups:
+        item.queue_free()
+    pickups.clear()
 
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
