@@ -5,6 +5,7 @@ extends RigidBody2D
 # var a: int = 2
 # var b: String = "text"
 
+# The first item in the array is furthest away from the player.
 var pickups: Array = []
 
 export var force = 100
@@ -32,11 +33,29 @@ func _integrate_forces(state) -> void:
     exert = exert.normalized()
     applied_force = exert*force
 
+func get_last_item():
+    if pickups.empty():
+        return null
+    return pickups.front()
+
+func drop_item(item_to_drop: Node2D):
+    # TODO: could just drop the one item instead of it and all the items following it.
+
+    # TODO: inefficient to pop from the front multiple tiems.
+    while true:
+        var dropped_item = pickups.pop_front()
+        dropped_item.queue_free()
+        if dropped_item == item_to_drop:
+            return
+
+func drop_all_items():
+    for item in pickups:
+        item.queue_free()
+    pickups.clear()
+
+
 func _on_Area2D_area_entered(area:Area2D) -> void:
-    print('picking up item')
     area.collision_layer = 1 << 3  # Put item on following_items layer so it isn't picked up again.
-    print(area.collision_layer)
-    print($Area2D.collision_mask)
     var pickup = area.get_parent()
 
     pickup.set_follow_target(self)

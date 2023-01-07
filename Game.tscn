@@ -96,6 +96,7 @@ position = Vector2( 874, 169 )
 
 [node name="Harvester" parent="." instance=ExtResource( 4 )]
 position = Vector2( 98, 113 )
+player_path = NodePath("../Player")
 
 [node name="Hunter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 221, 42 )
@@ -107,3 +108,20 @@ position = Vector2( 133, 445 )
 
 [node name="Pickup3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 939, 458 )
+
+[node name="Pickup4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 310, 459 )
+
+[node name="Pickup5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 575, 113 )
+
+[node name="Pickup6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 834, 370 )
+
+[node name="Pickup7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 711, 477 )
+
+[node name="Harvester2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 574, -13 )
+player_path = NodePath("../Player")
+horizontal = false
