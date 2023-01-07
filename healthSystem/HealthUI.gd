@@ -3,12 +3,12 @@ extends Control
 var hearts = 3 setget set_hearts
 var max_hearts = 3 setget set_max_hearts
 
-onready var label = $Label
+onready var progress = $TextureProgress
 
 func set_hearts(value):
     hearts = clamp(value, 0, max_hearts)
-    if label != null:
-        label.text ="HP = " + str(hearts)
+    if progress != null:
+        progress.value = (hearts/float(max_hearts))*100
 
 func set_max_hearts(value):
     max_hearts = max(value, 1)
