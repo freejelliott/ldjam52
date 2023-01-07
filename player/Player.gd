@@ -33,6 +33,9 @@ func _integrate_forces(state) -> void:
     exert = exert.normalized()
     applied_force = exert*force
 
+func get_vegetables():
+    return vegetables
+
 func get_last_vegetable():
     if vegetables.empty():
         return null
