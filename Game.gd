@@ -20,7 +20,7 @@ func _ready() -> void:
     spawn_end.x = (field.width - 1) * field.cell_size.x
     spawn_end.y = (field.height - 1) * field.cell_size.y
 
-    PlayerStats.connect("no_health", self, "end_game")
+    PlayerStats.connect("no_health", self, "_on_player_no_health")
 
     play_screen.get_tree().paused = true
     hud.visible = false
@@ -30,12 +30,19 @@ func _physics_process(delta: float) -> void:
     #TODO: spawn enemies
     pass
 
-func end_game() -> void:
+func _on_player_no_health() -> void:
     play_screen.get_tree().paused = true
     hud.visible = false
+    game_over.reason.text = 'You died.'
     game_over.visible = true
-    #TODO: show the reason for game over and the score
+    #TODO: show the score
 
+func _on_Den_no_lives() -> void:
+    play_screen.get_tree().paused = true
+    hud.visible = false
+    game_over.reason.text = 'Your children all died.'
+    game_over.visible = true
+    #TODO: show the score
 
 func _on_VegetableSpawnTimer_timeout() -> void:
     var new_vegetable = Vegetable.instance()

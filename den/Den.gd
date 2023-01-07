@@ -2,23 +2,30 @@ extends Node2D
 
 var Vegetable = preload('res://vegetable/Vegetable.gd')
 
+signal no_lives
+
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
-onready var control: Control = $Control
-onready var label: Label = $Control/PanelContainer/Label
-onready var progress: TextureProgress = $Control/PanelContainer/TextureProgress
+onready var request: Control = $Request
+onready var request_label: Label = $Request/Label
+onready var request_progress: TextureProgress = $Request/TextureProgress
+onready var health_bar : Label = $Health/Label
 
+export var max_lives = 3
+
+onready var lives = max_lives
 
 var requested_vegetables: Dictionary = {}
 
 
 func _ready() -> void:
-    control.visible = false
+    request.visible = false
+    health_bar.text = 'Lives: %d' % lives
 
 
 func _process(delta: float) -> void:
     if !request_timer.is_stopped():
-        progress.value = ((request_timer.wait_time - request_timer.time_left)/float(request_timer.wait_time)) * 100
+        request_progress.value = ((request_timer.wait_time - request_timer.time_left)/float(request_timer.wait_time)) * 100
 
 func vegetables_equal(v1: Dictionary, v2: Dictionary) -> bool:
     for key in v1:
@@ -30,11 +37,15 @@ func cancel_request() -> void:
     requested_vegetables.clear()
     new_request_timer.start()
     request_timer.stop()
-    control.visible = false
+    request.visible = false
 
 func _on_RequestTimer_timeout() -> void:
-    # TODO: Get angry that the request wasn't completed.
     print('Den request timed out')
+    lives -= 1
+    # TODO: show lives as number of children in the den.
+    health_bar.text = 'Lives: %d' % lives
+    if lives == 0:
+        emit_signal('no_lives')
     cancel_request()
 
 
@@ -46,11 +57,11 @@ func _on_NewRequestTimer_timeout() -> void:
         requested_vegetables[Vegetable.VegetableType.values()[rand_range(0, Vegetable.VegetableType.size())]] += 1
     print('Den wants %s' % [requested_vegetables])
     request_timer.start()
-    label.text = ''
-    label.text += 'Potatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Potato]
-    label.text += 'Tomatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Tomato]
-    label.text += 'Carrots: %d' % requested_vegetables[Vegetable.VegetableType.Carrot]
-    control.visible = true
+    request_label.text = ''
+    request_label.text += 'Potatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Potato]
+    request_label.text += 'Tomatoes: %d\n' % requested_vegetables[Vegetable.VegetableType.Tomato]
+    request_label.text += 'Carrots: %d' % requested_vegetables[Vegetable.VegetableType.Carrot]
+    request.visible = true
 
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
