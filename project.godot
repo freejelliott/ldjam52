@@ -14,6 +14,10 @@ config/name="ldjam52"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerStats="*res://HealthSystem/PlayerStats.tscn"
+
 [display]
 
 window/stretch/mode="viewport"
