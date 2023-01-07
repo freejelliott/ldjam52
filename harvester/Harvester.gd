@@ -1,52 +1,98 @@
 extends KinematicBody2D
 
-enum HarvesterType {
-    Side
-    Top
-}
-
-export var speed = 300
+export var speed = 0.01
 export var player_path: NodePath
-export var horizontal = true
+export var path_path: NodePath
 
 onready var player = get_node(player_path)
+onready var path = get_node(path_path)
+onready var last_position = position
+onready var up_collision = $UpCollision
+onready var left_collision = $LeftCollision
+onready var right_collision = $RightCollision
+onready var down_collision = $DownCollision
+onready var area_up_collision = $Area2D/UpCollision
+onready var area_left_collision = $Area2D/LeftCollision
+onready var area_right_collision = $Area2D/RightCollision
+onready var area_down_collision = $Area2D/DownCollision
 var stats = PlayerStats
 
-var direction = Vector2.RIGHT
+var heading = Vector2.LEFT
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    # Set the harvester collision box and parameters based on its direction.
-    var harvester_type = HarvesterType.Side
-    var collision := $SideCollision
-    var flip_factor := Vector2(-1, 1)
-    if !horizontal:
-        harvester_type = HarvesterType.Top
-        collision = $TopCollision
-        direction = Vector2.UP
-        flip_factor = Vector2(1, -1)
-    $AnimatedSprite.animation = HarvesterType.keys()[harvester_type]
-    collision.disabled = 0
-    var area_collision = collision.duplicate()
-    $Area2D.add_child(area_collision)
-    scale *= flip_factor
+
+func disable_all_collisions() -> void:
+    up_collision.disabled = true
+    left_collision.disabled = true
+    right_collision.disabled = true
+    down_collision.disabled = true
+    area_up_collision.disabled = true
+    area_left_collision.disabled = true
+    area_right_collision.disabled = true
+    area_down_collision.disabled = true
+
+    up_collision.visible = false
+    left_collision.visible = false
+    right_collision.visible = false
+    down_collision.visible = false
+    area_up_collision.visible = false
+    area_left_collision.visible = false
+    area_right_collision.visible = false
+    area_down_collision.visible = false
+
 
 func _physics_process(delta: float) -> void:
-    var collision = move_and_collide(direction * speed * delta)
+    var follow : PathFollow2D = path.get_node('PathFollow2D')
+    position = follow.global_position
 
-    if collision:
-        if direction == Vector2.RIGHT:
-            direction = Vector2.LEFT
-            $AnimatedSprite.scale *= Vector2(-1, 1)
-        elif direction == Vector2.LEFT:
-            direction = Vector2.RIGHT
-            $AnimatedSprite.scale *= Vector2(-1, 1)
-        elif direction == Vector2.UP:
-            direction = Vector2.DOWN
-            $AnimatedSprite.scale *= Vector2(1, -1)
-        elif direction == Vector2.DOWN:
-            direction = Vector2.UP
-            $AnimatedSprite.scale *= Vector2(1, -1)
+    var direction = position - last_position
+    direction = direction.normalized()
+
+    last_position = position
+
+    var new_heading
+
+    if direction.dot(Vector2.UP) > 0.9:
+        new_heading = Vector2.UP
+    elif direction.dot(Vector2.LEFT) > 0.9:
+        new_heading = Vector2.LEFT
+    elif direction.dot(Vector2.RIGHT) > 0.9:
+        new_heading = Vector2.RIGHT
+    else:
+        new_heading = Vector2.DOWN
+
+    if new_heading != heading:
+        heading = new_heading
+        disable_all_collisions()
+
+        # Good shit.
+        if heading == Vector2.UP:
+            $AnimatedSprite.animation = 'Top'
+            $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, -1)
+            up_collision.disabled = false
+            up_collision.visible = true
+            area_up_collision.disabled = false
+            area_up_collision.visible = true
+        elif heading == Vector2.LEFT:
+            $AnimatedSprite.animation = 'Side'
+            $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, 1)
+            left_collision.disabled = false
+            left_collision.visible = true
+            area_left_collision.disabled = false
+            area_left_collision.visible = true
+        elif heading == Vector2.RIGHT:
+            $AnimatedSprite.animation = 'Side'
+            $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(-1, 1)
+            right_collision.disabled = false
+            right_collision.visible = true
+            area_right_collision.disabled = false
+            area_right_collision.visible = true
+        else:
+            $AnimatedSprite.animation = 'Top'
+            $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, 1)
+            down_collision.disabled = false
+            down_collision.visible = true
+            area_down_collision.disabled = false
+            area_down_collision.visible = true
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:

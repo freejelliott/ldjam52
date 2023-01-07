@@ -34,8 +34,9 @@ margin_left = 496.0
 margin_top = 220.0
 margin_right = 792.0
 margin_bottom = 268.0
-min_value = -50.0
-max_value = 50.0
+min_value = -80.0
+max_value = 40.0
+value = -20.0
 
 [node name="VolumeLabel" type="Label" parent="."]
 margin_left = 424.0
