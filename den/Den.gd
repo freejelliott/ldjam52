@@ -2,10 +2,6 @@ extends Node2D
 
 var Vegetable = preload('res://vegetable/Vegetable.gd')
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
 onready var control: Control = $Control
@@ -16,10 +12,8 @@ onready var progress: TextureProgress = $Control/PanelContainer/TextureProgress
 var requested_vegetables: Dictionary = {}
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     control.visible = false
-    pass # Replace with function body.
 
 
 func _process(delta: float) -> void:

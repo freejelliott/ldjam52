@@ -1,10 +1,5 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
 export var speed = 300
 export var player_path: NodePath
 export var horizontal = true
@@ -19,11 +14,6 @@ func _ready() -> void:
     if !horizontal:
         direction = Vector2.UP
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
-
 func _physics_process(delta: float) -> void:
     var collision = move_and_collide(direction * speed * delta)
 
@@ -37,13 +27,12 @@ func _physics_process(delta: float) -> void:
         elif direction == Vector2.DOWN:
             direction = Vector2.UP
 
-
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
         player.drop_all_vegetables()
         stats.health -= 1
-        print (stats.health)
+        # TODO: invincibility frames
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
         var vegetable = area.get_parent()
