@@ -52,7 +52,7 @@ func drop_vegetable(vegetable_to_drop: Node2D):
         var dropped_vegetable = vegetables.pop_front()
         if !dropped_vegetable:
             return
-        dropped_vegetable.queue_free()
+        dropped_vegetable.destroy()
         if dropped_vegetable == vegetable_to_drop:
             return
 
@@ -86,11 +86,11 @@ func drop_vegetables(veges_to_drop: Dictionary):
         vegetables.back().set_follow_target(self)
 
     for v in to_remove:
-        v.queue_free()
+        v.destroy()
 
 func drop_all_vegetables():
     for vegetable in vegetables:
-        vegetable.queue_free()
+        vegetable.destroy()
     vegetables.clear()
 
 

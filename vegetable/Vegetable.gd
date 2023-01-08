@@ -12,6 +12,7 @@ export var follow_distance = 100
 export(VegetableType) var vegetable_type = VegetableType.Tomato
 
 onready var anim_sprite = $AnimatedSprite
+onready var animation = $AnimationPlayer
 
 var follow_target: Node2D
 
@@ -27,3 +28,9 @@ func _physics_process(delta: float) -> void:
 
         if velocity.length() > follow_distance:
             position += velocity * speed * delta
+
+func destroy() -> void:
+    set_follow_target(null)
+    animation.play('destroy')
+    yield(animation, "animation_finished")
+    queue_free()

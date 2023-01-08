@@ -106,6 +106,7 @@ pause_mode = 2
 visible = false
 
 [node name="Intro" parent="Menus" instance=ExtResource( 8 )]
+pause_mode = 2
 visible = false
 
 [node name="PlayScreen" type="Node2D" parent="."]
@@ -306,5 +307,6 @@ autoplay = true
 [connection signal="close_settings" from="Menus/Settings" to="." method="_on_Settings_close_settings"]
 [connection signal="open_settings" from="Menus/Settings" to="." method="_on_Settings_open_settings"]
 [connection signal="volume_changed" from="Menus/Settings" to="." method="_on_Settings_volume_changed"]
+[connection signal="intro_ended" from="Menus/Intro" to="." method="_on_Intro_intro_ended"]
 [connection signal="no_lives" from="PlayScreen/Den" to="." method="_on_Den_no_lives"]
 [connection signal="timeout" from="PlayScreen/VegetableSpawnTimer" to="." method="_on_VegetableSpawnTimer_timeout"]
