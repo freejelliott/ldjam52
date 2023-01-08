@@ -2,25 +2,20 @@ extends Node2D
 
 var Vegetable = preload('res://vegetable/Vegetable.tscn')
 
-var spawn_start : Vector2
-var spawn_end : Vector2
 
 onready var main_menu = $Menus/MainMenu
 onready var settings = $Menus/Settings
 onready var game_over = $Menus/GameOver
 
 onready var play_screen = $PlayScreen
-onready var field = $PlayScreen/Field
 onready var hud = $PlayScreen/HUD
 onready var audio_player = $AudioStreamPlayer
 
+onready var spawn_start : Vector2 = $PlayScreen/VegetableSpawnTopLeft.position
+onready var spawn_end : Vector2 = $PlayScreen/VegetableSpawnBottomRight.position
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    spawn_start.x = field.cell_size.x
-    spawn_start.y = field.cell_size.y
-    spawn_end.x = (field.width - 1) * field.cell_size.x
-    spawn_end.y = (field.height - 1) * field.cell_size.y
-
     PlayerStats.connect("no_health", self, "_on_player_no_health")
 
     play_screen.get_tree().paused = true

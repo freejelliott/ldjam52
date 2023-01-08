@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://harvester/Harvester.gd" type="Script" id=1]
-[ext_resource path="res://harvester.wav" type="AudioStream" id=2]
-[ext_resource path="res://side harvester.png" type="Texture" id=3]
-[ext_resource path="res://top down harvester.png" type="Texture" id=4]
+[ext_resource path="res://harvester/harvester.wav" type="AudioStream" id=2]
+[ext_resource path="res://harvester/side harvester.png" type="Texture" id=3]
+[ext_resource path="res://harvester/top down harvester.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
@@ -38,36 +38,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Harvester" type="KinematicBody2D"]
-collision_layer = 4
-collision_mask = 16
+[node name="Harvester" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( -0.5, 0.5 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 11 )
-animation = "Top"
+animation = "Side"
 playing = true
-
-[node name="UpCollision" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( -1, 65, -40, 22, -45, -57, -92, -69, -88, -94, 86, -91, 94, -59, 47, -56, 45, 7 )
-disabled = true
-
-[node name="LeftCollision" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( -217, 69, 73, 65, 73, -21, 163, -11, 145, -54, -3, -50, -5, -72, -92, -74, -143, -32, -133, 22, -201, 19 )
-disabled = true
-
-[node name="RightCollision" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( 216, 66, -66, 68, -70, -20, -157, -11, -158, -50, 7, -47, 3, -71, 89, -72, 141, -37, 139, 18, 201, 22 )
-disabled = true
-
-[node name="DownCollision" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( -92, 87, 91, 93, 91, 69, 42, 63, 43, -2, 1, -61, -43, -7, -43, 57, -94, 60 )
-disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

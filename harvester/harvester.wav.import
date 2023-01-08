@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/harvester.wav-864558d741ef6bfe734908cd94bcb529.sample"
+path="res://.import/harvester.wav-add975ab93e46a401b3d5a004817a7db.sample"
 
 [deps]
 
-source_file="res://harvester.wav"
-dest_files=[ "res://.import/harvester.wav-864558d741ef6bfe734908cd94bcb529.sample" ]
+source_file="res://harvester/harvester.wav"
+dest_files=[ "res://.import/harvester.wav-add975ab93e46a401b3d5a004817a7db.sample" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/top down harvester.png-bb4f5a0cec7d59bc04c7e8bc28f31464.stex"
+path="res://.import/vertical fence.png-eff98d0ebe7a6c0547e7243e9f0cce07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://top down harvester.png"
-dest_files=[ "res://.import/top down harvester.png-bb4f5a0cec7d59bc04c7e8bc28f31464.stex" ]
+source_file="res://vertical fence.png"
+dest_files=[ "res://.import/vertical fence.png-eff98d0ebe7a6c0547e7243e9f0cce07.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tomato.png-f11cfdd8cba2fb45e2f048cf519a4070.stex"
+path="res://.import/side harvester.png-95b01ad1e3327a636839daaa43256928.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tomato.png"
-dest_files=[ "res://.import/tomato.png-f11cfdd8cba2fb45e2f048cf519a4070.stex" ]
+source_file="res://harvester/side harvester.png"
+dest_files=[ "res://.import/side harvester.png-95b01ad1e3327a636839daaa43256928.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dirt_fence.png-1f114962d23e2976a3489894e352e9f0.stex"
+path="res://.import/potato.png-dfa364a47cb3e0fd93d88267fd9a86f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dirt_fence.png"
-dest_files=[ "res://.import/dirt_fence.png-1f114962d23e2976a3489894e352e9f0.stex" ]
+source_file="res://vegetable/potato.png"
+dest_files=[ "res://.import/potato.png-dfa364a47cb3e0fd93d88267fd9a86f1.stex" ]
 
 [params]
 
