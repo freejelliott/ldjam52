@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
 [ext_resource path="res://vegetable/carrot.png" type="Texture" id=3]
 [ext_resource path="res://vegetable/potato.png" type="Texture" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.450262 )
@@ -12,6 +13,37 @@ colors = PoolColorArray( 0, 0.015625, 1, 1 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 3 )
 width = 50
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.67121, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
+[sub_resource type="Curve" id=14]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, -0.203877, 0, 0, Vector2( 0.25082, -0.270455 ), -0.222808, -0.222808, 0, 0, Vector2( 0.501639, 0.220455 ), -0.179714, -0.179714, 0, 0, Vector2( 0.752459, -0.161364 ), 0.032241, 0.032241, 0, 0, Vector2( 0.993443, 0.0386364 ), -0.36166, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+lifetime_randomness = 0.3
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 35.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+orbit_velocity_curve = SubResource( 15 )
+damping = 100.0
+damping_random = 0.21
+scale = 0.1
+scale_random = 0.3
+color_ramp = SubResource( 13 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 25.0
@@ -56,14 +88,16 @@ script = ExtResource( 1 )
 scale = Vector2( 1, 50 )
 texture = SubResource( 2 )
 
-[node name="NewRequestTimer" type="Timer" parent="."]
-wait_time = 5.0
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -25 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 10
+lifetime = 1.5
 one_shot = true
-autostart = true
-
-[node name="RequestTimer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 16 )
+texture = ExtResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -144,6 +178,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 align = 1
 
-[connection signal="timeout" from="NewRequestTimer" to="." method="_on_NewRequestTimer_timeout"]
-[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[node name="RequestTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="NewRequestTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[connection signal="timeout" from="NewRequestTimer" to="." method="_on_NewRequestTimer_timeout"]

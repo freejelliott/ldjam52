@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 
     velocity = velocity.normalized()
 
-    if velocity:
+    if velocity.x:
         if velocity.x > 0:
             sprite.scale.x = abs(sprite.scale.x)
         else:
