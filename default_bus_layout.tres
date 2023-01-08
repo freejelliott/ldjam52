@@ -16,7 +16,6 @@ band_db/10000_hz = -19.9
 [sub_resource type="AudioEffectPitchShift" id=3]
 resource_name = "PitchShift"
 pitch_scale = 0.2
-fft_size = 2
 
 [sub_resource type="AudioEffectReverb" id=5]
 resource_name = "Reverb"
