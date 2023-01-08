@@ -285,10 +285,6 @@ autostart = true
 [node name="HealthUI" parent="PlayScreen/HUD" instance=ExtResource( 2 )]
 
 [node name="ScoreUI" parent="PlayScreen/HUD" instance=ExtResource( 15 )]
-margin_left = 947.428
-margin_top = 503.365
-margin_right = 1012.43
-margin_bottom = 518.365
 
 [node name="VegetableSpawnTopLeft" type="Position2D" parent="PlayScreen"]
 position = Vector2( 504, 464 )
