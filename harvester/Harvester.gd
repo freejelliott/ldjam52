@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Node2D
 
 export var speed = 0.01
 export var player_path: NodePath
@@ -7,10 +7,6 @@ export var path_path: NodePath
 onready var player = get_node(player_path)
 onready var path = get_node(path_path)
 onready var last_position = position
-onready var up_collision = $UpCollision
-onready var left_collision = $LeftCollision
-onready var right_collision = $RightCollision
-onready var down_collision = $DownCollision
 onready var area_up_collision = $Area2D/UpCollision
 onready var area_left_collision = $Area2D/LeftCollision
 onready var area_right_collision = $Area2D/RightCollision
@@ -21,19 +17,11 @@ var heading = Vector2.LEFT
 
 
 func disable_all_collisions() -> void:
-    up_collision.disabled = true
-    left_collision.disabled = true
-    right_collision.disabled = true
-    down_collision.disabled = true
     area_up_collision.disabled = true
     area_left_collision.disabled = true
     area_right_collision.disabled = true
     area_down_collision.disabled = true
 
-    up_collision.visible = false
-    left_collision.visible = false
-    right_collision.visible = false
-    down_collision.visible = false
     area_up_collision.visible = false
     area_left_collision.visible = false
     area_right_collision.visible = false
@@ -68,29 +56,21 @@ func _physics_process(delta: float) -> void:
         if heading == Vector2.UP:
             $AnimatedSprite.animation = 'Top'
             $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, -1)
-            up_collision.disabled = false
-            up_collision.visible = true
             area_up_collision.disabled = false
             area_up_collision.visible = true
         elif heading == Vector2.LEFT:
             $AnimatedSprite.animation = 'Side'
             $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, 1)
-            left_collision.disabled = false
-            left_collision.visible = true
             area_left_collision.disabled = false
             area_left_collision.visible = true
         elif heading == Vector2.RIGHT:
             $AnimatedSprite.animation = 'Side'
             $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(-1, 1)
-            right_collision.disabled = false
-            right_collision.visible = true
             area_right_collision.disabled = false
             area_right_collision.visible = true
         else:
             $AnimatedSprite.animation = 'Top'
             $AnimatedSprite.scale = abs($AnimatedSprite.scale.x) * Vector2(1, 1)
-            down_collision.disabled = false
-            down_collision.visible = true
             area_down_collision.disabled = false
             area_down_collision.visible = true
 

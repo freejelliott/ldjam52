@@ -7,6 +7,7 @@ export var home_path : NodePath
 onready var player = get_node(player_path)
 onready var home = get_node(home_path)
 onready var area: Area2D = $Area2D
+onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var eating_timer: Timer = $EatingTimer
 onready var stun_timer: Timer = $StunTimer
 onready var rest_timer: Timer = $RestTimer
@@ -31,6 +32,12 @@ func _physics_process(delta: float) -> void:
         var velocity = follow_target.position - position
 
         velocity = velocity.normalized()
+
+        if velocity.x:
+            if velocity.x > 0:
+                sprite.scale.x = -abs(sprite.scale.x)
+            else:
+                sprite.scale.x = abs(sprite.scale.x)
 
         position += velocity * speed * delta
 

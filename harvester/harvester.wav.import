@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/harvester.wav-add975ab93e46a401b3d5a004817a7db.sample"
+
+[deps]
+
+source_file="res://harvester/harvester.wav"
+dest_files=[ "res://.import/harvester.wav-add975ab93e46a401b3d5a004817a7db.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=3
+edit/loop_begin=70000
+edit/loop_end=-1
+compress/mode=1

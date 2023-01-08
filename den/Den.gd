@@ -13,12 +13,14 @@ onready var template_tomato : TextureRect = $Request/HBoxContainer/TemplateTomat
 onready var template_potato : TextureRect = $Request/HBoxContainer/TemplatePotato
 onready var template_carrot : TextureRect = $Request/HBoxContainer/TemplateCarrot
 onready var health_bar : Label = $Health/Label
+onready var particles: Particles2D = $Particles2D
 
 export var max_lives = 3
 
 onready var lives = max_lives
 
 var requested_vegetables: Dictionary = {}
+var stats = PlayerStats
 
 
 func _ready() -> void:
@@ -108,6 +110,8 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         return
 
     print('Player brought correct vegetables')
+    particles.emitting = true
+    stats.score += 1
 
     player.drop_vegetables(requested_vegetables)
     cancel_request()
