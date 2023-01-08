@@ -15,7 +15,6 @@ var stats = PlayerStats
 
 var heading = Vector2.LEFT
 
-
 func disable_all_collisions() -> void:
     area_up_collision.disabled = true
     area_left_collision.disabled = true
@@ -77,11 +76,9 @@ func _physics_process(delta: float) -> void:
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
-        player.drop_all_vegetables()
         stats.health -= 1
         # TODO: invincibility frames
         player.start_invincibility(3)
-        
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
         var vegetable = area.get_parent()
@@ -91,6 +88,6 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         var hunter = area.get_parent()
         hunter.stun()
     elif area.collision_layer == 1 << 3:
-        # Vegetable held by player
-        var vegetable = area.get_parent()
-        player.drop_vegetable(vegetable)
+        # Basket
+        var basket = area.get_parent()
+        player.lose_basket(basket)

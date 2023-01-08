@@ -9,7 +9,7 @@ func set_scores(value):
         if value > 0:
             star_animation.play('star')
             yield(star_animation, "animation_finished")
-        label.text = "Score = " + str(PlayerStats.score)
+        label.text = "Score: " + str(PlayerStats.score)
 
 func _ready():
     self.scores = PlayerStats.score

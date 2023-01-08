@@ -27,9 +27,19 @@ func _physics_process(delta: float) -> void:
         # Hunter goes home.
         follow_target = home
     else:
-        # Hunter follows the last vegetable the player is carrying or stands still if
+        # Hunter follows the closest full basket the player is carrying or stands still if
         # nothing is being carried.
-        follow_target = player.get_last_vegetable()
+        var closest_basket
+        var distance_to_closest_basket = 999999999999999
+        for basket in player.get_baskets():
+            if basket.holding_vegetable == null:
+                continue
+            var distance = (basket.position - position).length()
+            if distance < distance_to_closest_basket:
+                distance_to_closest_basket = distance
+                closest_basket = basket
+
+        follow_target = closest_basket
 
     if follow_target:
         var velocity = follow_target.position - position
@@ -53,9 +63,11 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
             rest_timer.start()
     else:
         if !hurt:
-            var vegetable = other_area.get_parent()
+            var basket = other_area.get_parent()
+            if basket.holding_vegetable == null:
+                return
             area.set_deferred('monitoring', false)
-            player.drop_vegetable(vegetable)
+            player.lose_basket(basket)
             print('hunter is eating')
             eating_timer.start()
 

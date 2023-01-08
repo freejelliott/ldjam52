@@ -65,7 +65,7 @@ margin_left = -138.0
 margin_top = -117.0
 margin_right = -20.0
 margin_bottom = -75.0
-text = "Score = 0"
+text = "Score: 0"
 
 [node name="StarPath" type="Path2D" parent="."]
 position = Vector2( 3.05176e-05, -23.2985 )
@@ -74,7 +74,7 @@ curve = SubResource( 1 )
 [node name="PathFollow2D" type="PathFollow2D" parent="StarPath"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 981.599, 507.355 )
-rotation = 1.09028
+rotation = 1.09021
 scale = Vector2( 1e-05, 1e-05 )
 offset = 523.806
 

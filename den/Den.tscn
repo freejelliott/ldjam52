@@ -126,6 +126,9 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
 
+[node name="PowerupPosition" type="Position2D" parent="."]
+position = Vector2( 0, 96 )
+
 [node name="Request" type="PanelContainer" parent="."]
 margin_left = -68.0
 margin_top = -117.0
@@ -210,7 +213,7 @@ margin_right = 53.5
 margin_bottom = 42.0
 grow_horizontal = 2
 custom_fonts/font = SubResource( 18 )
-text = "Lives = 5"
+text = "Lives: 3"
 align = 1
 
 [node name="RequestTimer" type="Timer" parent="."]

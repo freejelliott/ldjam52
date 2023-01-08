@@ -70,9 +70,10 @@ click={
 2d_physics/layer_1="player"
 2d_physics/layer_2="vegetables"
 2d_physics/layer_3="enemies"
-2d_physics/layer_4="following_vegetables"
+2d_physics/layer_4="baskets"
 2d_physics/layer_5="fence"
 2d_physics/layer_6="hunter home"
+2d_physics/layer_7="powerups"
 
 [physics]
 

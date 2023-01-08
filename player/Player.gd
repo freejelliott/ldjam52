@@ -1,7 +1,10 @@
 extends KinematicBody2D
 
-# The first vegetable in the array is furthest away from the player.
-var vegetables: Array = []
+var Powerup = preload('res://powerups/Powerup.gd')
+var BasketScene = preload('res://basket/Basket.tscn')
+
+# The first basket in the array is closeset to the player.
+var baskets: Array = []
 
 export var speed = 100
 
@@ -13,6 +16,9 @@ onready var timer = $InvinciblityTimer
 onready var area: Area2D = $Area2D
 signal invincibility_started
 signal invincibility_ended
+
+func _ready() -> void:
+    var basket = spawn_basket()
 
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
@@ -36,74 +42,58 @@ func _physics_process(delta: float) -> void:
     move_and_slide(velocity * speed)
 
 
-func get_vegetables():
-    return vegetables
-
-func get_last_vegetable():
-    if vegetables.empty():
-        return null
-    return vegetables.front()
-
-func drop_vegetable(vegetable_to_drop: Node2D):
-    # TODO: could just drop the one vegetable instead of it and all the vegetables following it.
-
-    # TODO: inefficient to pop from the front multiple tiems.
-    while true:
-        var dropped_vegetable = vegetables.pop_front()
-        if !dropped_vegetable:
-            return
-        dropped_vegetable.destroy()
-        if dropped_vegetable == vegetable_to_drop:
-            return
-
-func drop_vegetables(veges_to_drop: Dictionary):
-    var start_idx := vegetables.size()-1
-    var to_remove := []
-    # Loop through our owned veges starting nearest to us.
-    for i in range(vegetables.size()-1, -1, -1):
-        # Check if we should drop the veg.
-        var found_v
-        for v_drop in veges_to_drop:
-            if vegetables[i].vegetable_type == v_drop and veges_to_drop[v_drop] != 0:
-                found_v = vegetables[i]
-                to_remove.append(found_v)
-                veges_to_drop[v_drop] -= 1
-        if found_v == null:
-            # We shouldn't drop this veg.
-            vegetables[start_idx] = vegetables[i]
-            start_idx -= 1
-            continue
-
-        if veges_to_drop[found_v.vegetable_type] == 0:
-            veges_to_drop.erase(found_v.vegetable_type)
-
-    if start_idx == vegetables.size()-1:
-        vegetables.clear()
+func spawn_basket():
+    var basket = BasketScene.instance()
+    get_parent().call_deferred('add_child', basket)
+    if baskets.empty():
+        basket.position = position + Vector2(100, 0)
+        basket.set_follow_target(self)
     else:
-        vegetables = vegetables.slice(start_idx+1, vegetables.size()-1)
-        for i in range(vegetables.size()-1):
-            vegetables[i].set_follow_target(vegetables[i+1])
-        vegetables.back().set_follow_target(self)
+        basket.position = baskets.back().position + (baskets.back().position - baskets.back().follow_target.position)
+        basket.set_follow_target(baskets.back())
+    baskets.append(basket)
+    return basket
 
-    for v in to_remove:
-        v.destroy()
+func get_baskets():
+    return baskets
 
-func drop_all_vegetables():
-    for vegetable in vegetables:
-        vegetable.destroy()
-    vegetables.clear()
+func lose_basket(basket_to_lose: Node2D):
+    if !(basket_to_lose in baskets):
+        return
 
+    for i in baskets.size():
+        if baskets[i] == basket_to_lose:
+            if i < baskets.size() - 1:
+                baskets[i+1].set_follow_target(basket_to_lose.follow_target)
+            baskets.pop_at(i)
+            basket_to_lose.destroy()
+            return
+
+func drop_off_vegetables(veges_to_drop: Dictionary):
+    # TODO: shift vegetables up baskets?
+    for basket in baskets:
+        if basket.holding_vegetable in veges_to_drop:
+            veges_to_drop[basket.holding_vegetable] -= 1
+            if veges_to_drop[basket.holding_vegetable] == 0:
+                veges_to_drop.erase(basket.holding_vegetable)
+            basket.holding_vegetable = null
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
-    # Put vegetable on following_vegetables layer so it isn't picked up again.
-    area.collision_layer = 1 << 3
-    var vegetable = area.get_parent()
-
-    vegetable.set_follow_target(self)
-    if !vegetables.empty():
-        vegetables.back().set_follow_target(vegetable)
-
-    vegetables.append(vegetable)
+    if area.collision_layer == 1 << 1:
+        var vegetable = area.get_parent()
+        for basket in baskets:
+            if basket.holding_vegetable == null:
+                basket.holding_vegetable = vegetable.vegetable_type
+                # TODO: make vegetable fly to basket?
+                vegetable.queue_free()
+                break
+    elif area.collision_layer == 1 << 6:
+        var powerup = area.get_parent()
+        if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:
+            speed += 50
+        elif powerup.powerup_type == Powerup.PowerupType.Basket:
+            spawn_basket()
+        powerup.queue_free()
 
 # Invincibility functionality
 
