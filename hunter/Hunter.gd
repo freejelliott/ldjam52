@@ -46,6 +46,8 @@ func _physics_process(delta: float) -> void:
 
         velocity = velocity.normalized()
 
+        sprite.playing = velocity != Vector2.ZERO
+
         if velocity.x:
             if velocity.x > 0:
                 sprite.scale.x = -abs(sprite.scale.x)
@@ -53,6 +55,8 @@ func _physics_process(delta: float) -> void:
                 sprite.scale.x = abs(sprite.scale.x)
 
         position += velocity * speed * delta
+    else:
+        sprite.playing = false
 
 
 func _on_Area2D_area_entered(other_area:Area2D) -> void:
@@ -69,6 +73,7 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
             area.set_deferred('monitoring', false)
             player.lose_basket(basket)
             print('hunter is eating')
+            sprite.animation = 'eating'
             eating_timer.start()
 
 
@@ -82,6 +87,7 @@ func stun() -> void:
 
 func _on_EatingTimer_timeout() -> void:
     print('hunter finished eating')
+    sprite.animation = 'default'
     area.monitoring = true
 
 

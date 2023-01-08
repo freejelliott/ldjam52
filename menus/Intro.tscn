@@ -129,18 +129,18 @@ autowrap = true
 [node name="Text2" type="Label" parent="Panel"]
 anchor_right = 1.0
 margin_left = 92.0
-margin_top = 195.0
+margin_top = 323.0
 margin_right = -80.0
-margin_bottom = 462.0
+margin_bottom = 590.0
 text = "Take this chance to collect some perfectly ripe vegetables for your children."
 autowrap = true
 
 [node name="Text3" type="Label" parent="Panel"]
 anchor_right = 1.0
 margin_left = 92.0
-margin_top = 326.0
+margin_top = 606.0
 margin_right = -80.0
-margin_bottom = 593.0
+margin_bottom = 873.0
 text = "But make sure you avoid the farmer's machines and dogs..."
 autowrap = true
 
