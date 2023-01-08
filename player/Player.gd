@@ -7,6 +7,13 @@ export var speed = 100
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
 
+# Invincibility stuff
+var invincible = false setget set_invincible
+onready var timer = $InvinciblityTimer
+onready var area: Area2D = $Area2D
+signal invincibility_started
+signal invincibility_ended
+
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
     if Input.is_action_pressed('move_down'):
@@ -49,6 +56,38 @@ func drop_vegetable(vegetable_to_drop: Node2D):
         if dropped_vegetable == vegetable_to_drop:
             return
 
+func drop_vegetables(veges_to_drop: Dictionary):
+    var start_idx := vegetables.size()-1
+    var to_remove := []
+    # Loop through our owned veges starting nearest to us.
+    for i in range(vegetables.size()-1, -1, -1):
+        # Check if we should drop the veg.
+        var found_v
+        for v_drop in veges_to_drop:
+            if vegetables[i].vegetable_type == v_drop and veges_to_drop[v_drop] != 0:
+                found_v = vegetables[i]
+                to_remove.append(found_v)
+                veges_to_drop[v_drop] -= 1
+        if found_v == null:
+            # We shouldn't drop this veg.
+            vegetables[start_idx] = vegetables[i]
+            start_idx -= 1
+            continue
+
+        if veges_to_drop[found_v.vegetable_type] == 0:
+            veges_to_drop.erase(found_v.vegetable_type)
+
+    if start_idx == vegetables.size()-1:
+        vegetables.clear()
+    else:
+        vegetables = vegetables.slice(start_idx+1, vegetables.size()-1)
+        for i in range(vegetables.size()-1):
+            vegetables[i].set_follow_target(vegetables[i+1])
+        vegetables.back().set_follow_target(self)
+
+    for v in to_remove:
+        v.queue_free()
+
 func drop_all_vegetables():
     for vegetable in vegetables:
         vegetable.queue_free()
@@ -65,3 +104,27 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         vegetables.back().set_follow_target(vegetable)
 
     vegetables.append(vegetable)
+
+# Invincibility functionality
+
+func set_invincible(value):
+    invincible = value
+    if invincible == true:
+        emit_signal("invincibility_started")
+    else:
+        emit_signal("invincibility_ended")
+
+func start_invincibility(duration):
+    self.invincible = true
+    timer.start(duration)
+
+func _on_InvinciblityTimer_timeout():
+    self.invincible = false
+
+func _on_Player_invincibility_started():
+    print("Invincibility started")
+    area.set_deferred("monitorable", false)
+    
+func _on_Player_invincibility_ended():
+    #print("Invincibility ended")
+    area.monitorable = true
