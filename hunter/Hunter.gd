@@ -79,6 +79,7 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
 
 func stun() -> void:
     hurt = true
+    sprite.modulate = Color(1, 1, 1, 0.5)
     area.set_deferred('monitorable', false)
     area.set_deferred('monitoring', false)
     print('hunter is stunned')
@@ -101,3 +102,4 @@ func _on_RestTimer_timeout() -> void:
     area.monitoring = true
     area.monitorable = true
     hurt = false
+    sprite.modulate = Color(1, 1, 1, 1)
