@@ -9,6 +9,7 @@ var baskets: Array = []
 export var speed = 100
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
+onready var animation:= $BlinkAnimation
 
 # Invincibility stuff
 var invincible = false setget set_invincible
@@ -110,8 +111,8 @@ func set_invincible(value):
 
 func start_invincibility(duration):
     self.invincible = true
-    # TODO: blink while invincible?
     timer.start(duration)
+    animation.play("blink")
 
 func _on_InvinciblityTimer_timeout():
     self.invincible = false
@@ -123,3 +124,4 @@ func _on_Player_invincibility_started():
 func _on_Player_invincibility_ended():
     print("Invincibility ended")
     area.monitorable = true
+    animation.stop(true)
