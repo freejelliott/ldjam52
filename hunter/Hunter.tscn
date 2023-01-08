@@ -1,31 +1,62 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://hunter/Hunter.gd" type="Script" id=1]
+[ext_resource path="res://hunter/walking dog sprite.png" type="Texture" id=2]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.513089 )
-colors = PoolColorArray( 1, 0.421875, 0, 1 )
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 924, 770 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-width = 50
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 924, 0, 924, 770 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 25.02
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1848, 0, 924, 770 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 2772, 0, 924, 770 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 3696, 0, 924, 770 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 27.0
+height = 32.0
 
 [node name="Hunter" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1, 50 )
-texture = SubResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -9.53674e-07 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 6 )
+playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+position = Vector2( 0, 10 )
+rotation = 1.5708
+shape = SubResource( 7 )
 
 [node name="EatingTimer" type="Timer" parent="."]
 wait_time = 5.0
