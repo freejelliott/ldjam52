@@ -116,6 +116,7 @@ func set_invincible(value):
 
 func start_invincibility(duration):
     self.invincible = true
+    # TODO: blink while invincible?
     timer.start(duration)
 
 func _on_InvinciblityTimer_timeout():
@@ -124,7 +125,7 @@ func _on_InvinciblityTimer_timeout():
 func _on_Player_invincibility_started():
     print("Invincibility started")
     area.set_deferred("monitorable", false)
-    
+
 func _on_Player_invincibility_ended():
-    #print("Invincibility ended")
+    print("Invincibility ended")
     area.monitorable = true
