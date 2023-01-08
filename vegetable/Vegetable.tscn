@@ -151,7 +151,7 @@ follow_distance = 50
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 23 )
 animation = "Carrot"
-frame = 4
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

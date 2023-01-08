@@ -13,6 +13,7 @@ export(VegetableType) var vegetable_type = VegetableType.Tomato
 
 onready var anim_sprite = $AnimatedSprite
 onready var animation = $AnimationPlayer
+onready var area = $Area2D
 
 var follow_target: Node2D
 
@@ -30,6 +31,7 @@ func _physics_process(delta: float) -> void:
             position += velocity * speed * delta
 
 func destroy() -> void:
+    area.set_deferred('monitorable', false)
     set_follow_target(null)
     animation.play('destroy')
     yield(animation, "animation_finished")

@@ -6,12 +6,12 @@ signal no_lives
 
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
-onready var request: Control = $Request
-onready var request_progress: TextureProgress = $Request/TextureProgress
-onready var request_container: HBoxContainer = $Request/HBoxContainer
-onready var template_tomato : TextureRect = $Request/HBoxContainer/TemplateTomato
-onready var template_potato : TextureRect = $Request/HBoxContainer/TemplatePotato
-onready var template_carrot : TextureRect = $Request/HBoxContainer/TemplateCarrot
+onready var request: PanelContainer = $Request
+onready var request_progress: TextureProgress = $Request/VBoxContainer/TextureProgress
+onready var request_container: GridContainer = $Request/VBoxContainer/GridContainer
+onready var template_tomato : TextureRect = $Request/VBoxContainer/GridContainer/TemplateTomato
+onready var template_potato : TextureRect = $Request/VBoxContainer/GridContainer/TemplatePotato
+onready var template_carrot : TextureRect = $Request/VBoxContainer/GridContainer/TemplateCarrot
 onready var health_bar : Label = $Health/Label
 onready var particles: Particles2D = $Particles2D
 
@@ -68,7 +68,7 @@ func _on_NewRequestTimer_timeout() -> void:
     for vegetable_type in Vegetable.VegetableType.values():
         requested_vegetables[vegetable_type] = 0
 
-    for i in rand_range(1, 6):
+    for i in rand_range(1, 9):
         requested_vegetables[Vegetable.VegetableType.values()[rand_range(0, Vegetable.VegetableType.size())]] += 1
     print('Den wants %s' % [requested_vegetables])
     request_timer.start()

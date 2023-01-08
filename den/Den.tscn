@@ -1,10 +1,12 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
 [ext_resource path="res://vegetable/carrot.png" type="Texture" id=3]
 [ext_resource path="res://vegetable/potato.png" type="Texture" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://menus/ui.tres" type="Theme" id=6]
+[ext_resource path="res://menus/Abalone Smile.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.450262 )
@@ -48,6 +50,33 @@ color_ramp = SubResource( 13 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 25.0
 
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.796078, 0.796078, 0.796078, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.560784, 0.560784, 0.560784, 1 )
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 30, 20, 320, 310 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 50, 50, 270, 280 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 40, 40, 310, 320 )
+
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 0, 0.0419922, 1, 1 )
@@ -66,20 +95,11 @@ gradient = SubResource( 7 )
 width = 32
 height = 32
 
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 30, 20, 320, 310 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 50, 50, 270, 280 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 40, 40, 310, 320 )
+[sub_resource type="DynamicFont" id=18]
+size = 25
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
 
 [node name="Den" type="Node2D"]
 script = ExtResource( 1 )
@@ -106,78 +126,91 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
 
-[node name="Request" type="Control" parent="."]
-margin_left = -65.0
-margin_top = -186.0
-margin_right = 65.0
-margin_bottom = -35.0
+[node name="Request" type="PanelContainer" parent="."]
+margin_left = -68.0
+margin_top = -117.0
+margin_right = 68.0
+margin_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
+theme = ExtResource( 6 )
+custom_styles/panel = SubResource( 17 )
 
-[node name="TextureProgress" type="TextureProgress" parent="Request"]
-margin_left = 50.0
-margin_top = 111.0
-margin_right = 82.0
-margin_bottom = 143.0
-texture_under = SubResource( 6 )
-texture_progress = SubResource( 8 )
-fill_mode = 4
+[node name="VBoxContainer" type="VBoxContainer" parent="Request"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 132.0
+margin_bottom = 80.0
+size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Request"]
-margin_left = -143.0
-margin_top = 43.0
-margin_right = 275.0
-margin_bottom = 100.0
-alignment = 1
+[node name="GridContainer" type="GridContainer" parent="Request/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 40.0
+columns = 3
 
-[node name="TemplateTomato" type="TextureRect" parent="Request/HBoxContainer"]
-visible = false
-margin_left = 184.0
-margin_top = 3.0
-margin_right = 234.0
-margin_bottom = 53.0
-rect_min_size = Vector2( 50, 50 )
-size_flags_horizontal = 0
-size_flags_vertical = 4
+[node name="TemplateTomato" type="TextureRect" parent="Request/VBoxContainer/GridContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_vertical = 0
 texture = SubResource( 9 )
 expand = true
 stretch_mode = 2
 
-[node name="TemplatePotato" type="TextureRect" parent="Request/HBoxContainer"]
-visible = false
-margin_left = 184.0
-margin_top = 3.0
-margin_right = 234.0
-margin_bottom = 53.0
-rect_min_size = Vector2( 50, 50 )
+[node name="TemplatePotato" type="TextureRect" parent="Request/VBoxContainer/GridContainer"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 0
 texture = SubResource( 10 )
 expand = true
 stretch_mode = 2
 
-[node name="TemplateCarrot" type="TextureRect" parent="Request/HBoxContainer"]
-visible = false
-margin_left = 184.0
-margin_top = 3.0
-margin_right = 234.0
-margin_bottom = 53.0
-rect_min_size = Vector2( 50, 50 )
+[node name="TemplateCarrot" type="TextureRect" parent="Request/VBoxContainer/GridContainer"]
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 0
 texture = SubResource( 11 )
 expand = true
 stretch_mode = 2
 
+[node name="TextureProgress" type="TextureProgress" parent="Request/VBoxContainer"]
+margin_left = 48.0
+margin_top = 44.0
+margin_right = 80.0
+margin_bottom = 76.0
+size_flags_horizontal = 4
+texture_under = SubResource( 6 )
+texture_progress = SubResource( 8 )
+fill_mode = 4
+
 [node name="Health" type="Control" parent="."]
-margin_left = -48.0
-margin_top = 33.0
-margin_right = 49.0
-margin_bottom = 54.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = 24.0
+margin_right = 100.0
+margin_bottom = 45.0
 mouse_filter = 2
+theme = ExtResource( 6 )
 
 [node name="Label" type="Label" parent="Health"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -53.5
+margin_right = 53.5
+margin_bottom = 42.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 18 )
+text = "Lives = 5"
 align = 1
 
 [node name="RequestTimer" type="Timer" parent="."]
