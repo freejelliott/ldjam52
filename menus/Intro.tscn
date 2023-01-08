@@ -132,7 +132,7 @@ margin_left = 92.0
 margin_top = 323.0
 margin_right = -80.0
 margin_bottom = 590.0
-text = "Take this chance to collect some perfectly ripe vegetables for your children."
+text = "Take this chance to collect some perfectly ripe vegetables for your little ones."
 autowrap = true
 
 [node name="Text3" type="Label" parent="Panel"]

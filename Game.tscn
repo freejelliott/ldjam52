@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HealthUI.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://vertical fence.png" type="Texture" id=16]
 [ext_resource path="res://doghouse-03.png" type="Texture" id=17]
 [ext_resource path="res://doghouse-02.png" type="Texture" id=18]
+[ext_resource path="res://random filler rocks.png" type="Texture" id=19]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 1866.25, 68.25 )
@@ -180,6 +181,36 @@ texture = ExtResource( 18 )
 position = Vector2( 412, 2520 )
 scale = Vector2( -0.5, 0.5 )
 texture = ExtResource( 17 )
+
+[node name="Rocks" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 658, 1423.5 )
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="Rocks2" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 2210, 1704 )
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="Rocks3" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 3082, 2520 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="Rocks4" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 2570, 664 )
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="Rocks5" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 1190, 2384 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="Rocks6" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 1530, 1004 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 19 )
 
 [node name="Player" parent="PlayScreen" instance=ExtResource( 1 )]
 position = Vector2( 2529, 2390 )

@@ -128,7 +128,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 23 )
 animation = "Carrot"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
