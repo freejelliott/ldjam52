@@ -33,10 +33,11 @@ func _physics_process(delta: float) -> void:
 
         velocity = velocity.normalized()
 
-        if velocity.x > 0:
-            sprite.scale.x = -abs(sprite.scale.x)
-        else:
-            sprite.scale.x = abs(sprite.scale.x)
+        if velocity:
+            if velocity.x > 0:
+                sprite.scale.x = -abs(sprite.scale.x)
+            else:
+                sprite.scale.x = abs(sprite.scale.x)
 
         position += velocity * speed * delta
 

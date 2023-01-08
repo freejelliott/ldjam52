@@ -5,6 +5,8 @@ var vegetables: Array = []
 
 export var speed = 100
 
+onready var sprite: AnimatedSprite = $AnimatedSprite
+
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
     if Input.is_action_pressed('move_down'):
@@ -17,6 +19,13 @@ func _physics_process(delta: float) -> void:
         velocity.y = -1
 
     velocity = velocity.normalized()
+
+    if velocity:
+        if velocity.x > 0:
+            sprite.scale.x = abs(sprite.scale.x)
+        else:
+            sprite.scale.x = -abs(sprite.scale.x)
+
     move_and_slide(velocity * speed)
 
 
