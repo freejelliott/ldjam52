@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HealthUI.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://hunter/Hunter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game.gd" type="Script" id=6]
 [ext_resource path="res://dirt.png" type="Texture" id=7]
+[ext_resource path="res://menus/Intro.tscn" type="PackedScene" id=8]
 [ext_resource path="res://fence across.png" type="Texture" id=9]
 [ext_resource path="res://menus/Settings.tscn" type="PackedScene" id=11]
 [ext_resource path="res://menus/MainMenu.tscn" type="PackedScene" id=12]
@@ -102,6 +103,9 @@ visible = false
 
 [node name="Settings" parent="Menus" instance=ExtResource( 11 )]
 pause_mode = 2
+visible = false
+
+[node name="Intro" parent="Menus" instance=ExtResource( 8 )]
 visible = false
 
 [node name="PlayScreen" type="Node2D" parent="."]
@@ -284,10 +288,6 @@ autostart = true
 [node name="HealthUI" parent="PlayScreen/HUD" instance=ExtResource( 2 )]
 
 [node name="ScoreUI" parent="PlayScreen/HUD" instance=ExtResource( 15 )]
-margin_left = 947.428
-margin_top = 503.365
-margin_right = 1012.43
-margin_bottom = 518.365
 
 [node name="VegetableSpawnTopLeft" type="Position2D" parent="PlayScreen"]
 position = Vector2( 504, 464 )
