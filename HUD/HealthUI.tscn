@@ -21,6 +21,7 @@ width = 196
 [node name="HealthUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]

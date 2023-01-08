@@ -4,6 +4,7 @@ var Vegetable = preload('res://vegetable/Vegetable.tscn')
 
 
 onready var main_menu = $Menus/MainMenu
+onready var intro = $Menus/Intro
 onready var settings = $Menus/Settings
 onready var game_over = $Menus/GameOver
 
@@ -22,9 +23,6 @@ func _ready() -> void:
     hud.visible = false
     main_menu.visible = true
 
-func _physics_process(delta: float) -> void:
-    #TODO: spawn enemies
-    pass
 
 func _on_player_no_health() -> void:
     play_screen.get_tree().paused = true
@@ -50,8 +48,13 @@ func _on_VegetableSpawnTimer_timeout() -> void:
 
 
 func _on_MainMenu_start_game() -> void:
-    print('start game')
     main_menu.visible = false
+    intro.visible = true
+    intro.start_intro()
+
+
+func _on_Intro_intro_ended() -> void:
+    intro.visible = false
     play_screen.get_tree().paused = false
     hud.visible = true
 
@@ -69,7 +72,7 @@ func _on_Settings_close_settings() -> void:
 
 
 func _on_Settings_open_settings() -> void:
-    if game_over.visible or main_menu.visible:
+    if game_over.visible or main_menu.visible or intro.visible:
         return
     settings.visible = true
     play_screen.get_tree().paused = true

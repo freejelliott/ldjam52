@@ -111,6 +111,7 @@ margin_left = -65.0
 margin_top = -186.0
 margin_right = 65.0
 margin_bottom = -35.0
+mouse_filter = 2
 
 [node name="TextureProgress" type="TextureProgress" parent="Request"]
 margin_left = 50.0
@@ -172,6 +173,7 @@ margin_left = -48.0
 margin_top = 33.0
 margin_right = 49.0
 margin_bottom = 54.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Health"]
 anchor_right = 1.0
