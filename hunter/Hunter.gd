@@ -14,6 +14,9 @@ onready var rest_timer: Timer = $RestTimer
 
 var hurt = false
 
+func _ready() -> void:
+    $AudioStreamPlayer2D.play(rand_range(0, $AudioStreamPlayer2D.stream.get_length()))
+
 func _physics_process(delta: float) -> void:
     if !eating_timer.is_stopped() or !stun_timer.is_stopped() or !rest_timer.is_stopped():
         # Don't move while eating or resting or stunned.
