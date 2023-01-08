@@ -38,6 +38,14 @@ func vegetables_equal(v1: Dictionary, v2: Dictionary) -> bool:
             return false
     return true
 
+func vegetables_gte(v1: Dictionary, v2: Dictionary) -> bool:
+    print(v1)
+    print(v2)
+    for key in v1:
+        if v1[key] < v2[key]:
+            return false
+    return true
+
 func cancel_request() -> void:
     requested_vegetables.clear()
     new_request_timer.start()
@@ -79,7 +87,6 @@ func _on_NewRequestTimer_timeout() -> void:
         request_container.add_child(icon)
     request.visible = true
 
-
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if requested_vegetables.empty():
         print('Den has no request')
@@ -96,11 +103,11 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
 
     print('Player hit den holding %s' % [player_vegetables])
 
-    if !vegetables_equal(player_vegetables, requested_vegetables):
+    if !vegetables_gte(player_vegetables, requested_vegetables):
         print('Player brought wrong vegetables')
         return
 
     print('Player brought correct vegetables')
 
+    player.drop_vegetables(requested_vegetables)
     cancel_request()
-    player.drop_all_vegetables()

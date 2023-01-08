@@ -40,6 +40,38 @@ func drop_vegetable(vegetable_to_drop: Node2D):
         if dropped_vegetable == vegetable_to_drop:
             return
 
+func drop_vegetables(veges_to_drop: Dictionary):
+    var start_idx := vegetables.size()-1
+    var to_remove := []
+    # Loop through our owned veges starting nearest to us.
+    for i in range(vegetables.size()-1, -1, -1):
+        # Check if we should drop the veg.
+        var found_v
+        for v_drop in veges_to_drop:
+            if vegetables[i].vegetable_type == v_drop and veges_to_drop[v_drop] != 0:
+                found_v = vegetables[i]
+                to_remove.append(found_v)
+                veges_to_drop[v_drop] -= 1
+        if found_v == null:
+            # We shouldn't drop this veg.
+            vegetables[start_idx] = vegetables[i]
+            start_idx -= 1
+            continue
+
+        if veges_to_drop[found_v.vegetable_type] == 0:
+            veges_to_drop.erase(found_v.vegetable_type)
+
+    if start_idx == vegetables.size()-1:
+        vegetables.clear()
+    else:
+        vegetables = vegetables.slice(start_idx+1, vegetables.size()-1)
+        for i in range(vegetables.size()-1):
+            vegetables[i].set_follow_target(vegetables[i+1])
+        vegetables.back().set_follow_target(self)
+
+    for v in to_remove:
+        v.queue_free()
+
 func drop_all_vegetables():
     for vegetable in vegetables:
         vegetable.queue_free()

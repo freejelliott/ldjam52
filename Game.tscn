@@ -169,8 +169,7 @@ scale = Vector2( 1, 1.01688 )
 curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="PlayScreen/HarvesterPath"]
-position = Vector2( 2498.55, 2500.83 )
-offset = 20915.7
+position = Vector2( 555, 247 )
 rotate = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayScreen/HarvesterPath/PathFollow2D"]
