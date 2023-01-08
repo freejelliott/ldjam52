@@ -90,8 +90,10 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
     elif area.collision_layer == 1 << 6:
         var powerup = area.get_parent()
         if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:
+            print('picked up boots')
             speed += 50
         elif powerup.powerup_type == Powerup.PowerupType.Basket:
+            print('picked up basket')
             spawn_basket()
         powerup.queue_free()
 

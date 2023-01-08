@@ -16,6 +16,7 @@ onready var template_carrot : TextureRect = $Request/VBoxContainer/GridContainer
 onready var health_bar : Label = $Health/Label
 onready var particles: Particles2D = $Particles2D
 onready var powerup_position: Position2D = $PowerupPosition
+onready var tween: Tween = $Tween
 
 export var max_lives = 3
 
@@ -30,6 +31,12 @@ func _ready() -> void:
     for child in request_container.get_children():
         request_container.remove_child(child)
 
+    # TODO: remove
+    call_deferred('debug_spawn_powerups')
+
+func debug_spawn_powerups():
+    for i in 5:
+        spawn_powerup()
 
 func _process(delta: float) -> void:
     if !request_timer.is_stopped():
@@ -82,6 +89,16 @@ func _on_NewRequestTimer_timeout() -> void:
     update_request()
     request.visible = true
 
+func spawn_powerup() -> void:
+    var powerup = PowerupScene.instance()
+    get_parent().add_child(powerup)
+    tween.interpolate_property(powerup, "position",
+        position, position + powerup_position.position, 1,
+        Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+    tween.start()
+    yield(tween, "tween_completed")
+    powerup.set_pickupable(true)
+
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if requested_vegetables.empty():
@@ -97,9 +114,6 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         particles.emitting = true
         stats.score += 1
         cancel_request()
-        # TODO: powerup flies into position.
-        var powerup = PowerupScene.instance()
-        get_parent().add_child(powerup)
-        powerup.position = position + powerup_position.position
+        spawn_powerup()
     else:
         update_request()
