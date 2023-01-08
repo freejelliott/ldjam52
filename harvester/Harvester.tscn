@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://harvester/Harvester.gd" type="Script" id=1]
-[ext_resource path="res://harvester/harvester.wav" type="AudioStream" id=2]
+[ext_resource path="res://harvester.wav" type="AudioStream" id=2]
 [ext_resource path="res://harvester/side harvester.png" type="Texture" id=3]
 [ext_resource path="res://harvester/top down harvester.png" type="Texture" id=4]
 
@@ -74,12 +74,10 @@ polygon = PoolVector2Array( -92, 87, 91, 93, 91, 69, 42, 63, 43, -2, 1, -61, -43
 disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 167, 74 )
+position = Vector2( 2, 2 )
 stream = ExtResource( 2 )
-volume_db = 1.748
+volume_db = 4.0
 autoplay = true
-max_distance = 500.0
-attenuation = 1.62451
-bus = "harvester"
+attenuation = 1.86607
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
