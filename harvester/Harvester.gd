@@ -80,6 +80,8 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         player.drop_all_vegetables()
         stats.health -= 1
         # TODO: invincibility frames
+        player.start_invincibility(3)
+        
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
         var vegetable = area.get_parent()

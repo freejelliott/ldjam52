@@ -7,6 +7,13 @@ export var speed = 100
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
 
+# Invincibility stuff
+var invincible = false setget set_invincible
+onready var timer = $InvinciblityTimer
+onready var area: Area2D = $Area2D
+signal invincibility_started
+signal invincibility_ended
+
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
     if Input.is_action_pressed('move_down'):
@@ -97,3 +104,27 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         vegetables.back().set_follow_target(vegetable)
 
     vegetables.append(vegetable)
+
+# Invincibility functionality
+
+func set_invincible(value):
+    invincible = value
+    if invincible == true:
+        emit_signal("invincibility_started")
+    else:
+        emit_signal("invincibility_ended")
+
+func start_invincibility(duration):
+    self.invincible = true
+    timer.start(duration)
+
+func _on_InvinciblityTimer_timeout():
+    self.invincible = false
+
+func _on_Player_invincibility_started():
+    print("Invincibility started")
+    area.set_deferred("monitorable", false)
+    
+func _on_Player_invincibility_ended():
+    #print("Invincibility ended")
+    area.monitorable = true
