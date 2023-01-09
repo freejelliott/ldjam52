@@ -8,11 +8,11 @@ var powerup_baskets = 0
 
 func set_powerup_boots(value):
     if label_boots != null:
-        label_boots.text = "Boots: " + str(PlayerStats.powerup_boots)
+        label_boots.text = str(PlayerStats.powerup_boots)
 
 func set_powerup_baskets(value):
      if label_baskets != null:
-        label_baskets.text = "Baskets: " + str(PlayerStats.powerup_baskets)
+        label_baskets.text = str(PlayerStats.powerup_baskets)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
