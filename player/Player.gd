@@ -8,8 +8,7 @@ var Vegetable = preload('res://vegetable/Vegetable.gd')
 var baskets: Array = []
 var held_vegetable = null
 
-export var speed = 500#150 # TODO: change back
-
+export var speed = 150
 export var boot_bonus_speed = 50
 
 export var warning_size_radius = 200.0
@@ -30,7 +29,7 @@ onready var area: Area2D = $Area2D
 func _process(delta: float) -> void:
     var c = get_canvas_transform()
     var view_size = get_viewport_rect().size / c.get_scale()
-    
+
     for e in nearby_enemies:
         var v = e.position - $Camera2D.get_camera_screen_center()
         var orig_v = v
