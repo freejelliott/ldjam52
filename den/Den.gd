@@ -9,7 +9,7 @@ onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
 onready var request: PanelContainer = $Request
-onready var request_progress: TextureProgress = $Request/VBoxContainer/TextureProgress
+onready var request_progress: TextureProgress = $TextureProgress
 onready var request_container: GridContainer = $Request/VBoxContainer/GridContainer
 onready var template_tomato : TextureRect = $Request/VBoxContainer/GridContainer/TemplateTomato
 onready var template_potato : TextureRect = $Request/VBoxContainer/GridContainer/TemplatePotato
@@ -31,6 +31,7 @@ var stats = PlayerStats
 
 func _ready() -> void:
     request.visible = false
+    request_progress.visible = false
     for child in request_container.get_children():
         request_container.remove_child(child)
 
@@ -45,13 +46,14 @@ func debug_spawn_powerups():
 
 func _process(delta: float) -> void:
     if !request_timer.is_stopped():
-        request_progress.value = ((request_timer.wait_time - request_timer.time_left)/float(request_timer.wait_time)) * 100
+        request_progress.value = 100 - (((request_timer.wait_time - request_timer.time_left)/float(request_timer.wait_time)) * 100)
 
 func cancel_request() -> void:
     requested_vegetables.clear()
     new_request_timer.start()
     request_timer.stop()
     request.visible = false
+    request_progress.visible = false
 
 func _on_child_health_changed(health):
     match PlayerStats.child_lives:
@@ -113,6 +115,7 @@ func _on_NewRequestTimer_timeout() -> void:
     request_timer.start()
     update_request()
     request.visible = true
+    request_progress.visible = true
 
 func spawn_powerup() -> void:
     var powerup = PowerupScene.instance()

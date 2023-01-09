@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
@@ -6,11 +6,13 @@
 [ext_resource path="res://vegetable/potato.png" type="Texture" id=4]
 [ext_resource path="res://Hearts V2.png" type="Texture" id=5]
 [ext_resource path="res://menus/ui.tres" type="Theme" id=6]
+[ext_resource path="res://den/den-counter-01.png" type="Texture" id=7]
 [ext_resource path="res://den/hooray.mp3" type="AudioStream" id=8]
 [ext_resource path="res://den/fail.mp3" type="AudioStream" id=9]
 [ext_resource path="res://den/den-1kid.png" type="Texture" id=10]
 [ext_resource path="res://den/den-3kids.png" type="Texture" id=11]
 [ext_resource path="res://den/den-2kids.png" type="Texture" id=12]
+[ext_resource path="res://den/den-counter-02.png" type="Texture" id=13]
 
 [sub_resource type="AtlasTexture" id=21]
 flags = 4
@@ -133,20 +135,6 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 40, 40, 310, 320 )
 
-[sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 0.0419922, 1, 1 )
-
-[sub_resource type="GradientTexture2D" id=6]
-gradient = SubResource( 5 )
-
-[sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 1, 0, 0, 1 )
-
-[sub_resource type="GradientTexture2D" id=8]
-gradient = SubResource( 7 )
-
 [node name="Den" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -181,16 +169,25 @@ shape = SubResource( 24 )
 [node name="PowerupPosition" type="Position2D" parent="."]
 position = Vector2( 0, 137 )
 
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = 50.0
+margin_top = -195.0
+margin_right = 150.0
+margin_bottom = -95.0
+rect_min_size = Vector2( 64, 64 )
+rect_scale = Vector2( -1, 1 )
+size_flags_horizontal = 4
+texture_under = ExtResource( 13 )
+texture_progress = ExtResource( 7 )
+fill_mode = 4
+
 [node name="Request" type="PanelContainer" parent="."]
-visible = false
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 margin_left = -44.0
-margin_top = -255.0
+margin_top = -288.0
 margin_right = 44.0
-margin_bottom = -99.0
+margin_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -201,7 +198,7 @@ custom_styles/panel = SubResource( 17 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 252.0
-margin_bottom = 152.0
+margin_bottom = 84.0
 size_flags_vertical = 0
 
 [node name="GridContainer" type="GridContainer" parent="Request/VBoxContainer"]
@@ -239,17 +236,6 @@ size_flags_vertical = 0
 texture = SubResource( 11 )
 expand = true
 stretch_mode = 2
-
-[node name="TextureProgress" type="TextureProgress" parent="Request/VBoxContainer"]
-margin_left = 92.0
-margin_top = 84.0
-margin_right = 156.0
-margin_bottom = 148.0
-rect_min_size = Vector2( 64, 64 )
-size_flags_horizontal = 4
-texture_under = SubResource( 6 )
-texture_progress = SubResource( 8 )
-fill_mode = 4
 
 [node name="RequestTimer" type="Timer" parent="."]
 wait_time = 30.0
