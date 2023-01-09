@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
@@ -6,17 +6,59 @@
 [ext_resource path="res://vegetable/potato.png" type="Texture" id=4]
 [ext_resource path="res://Hearts V2.png" type="Texture" id=5]
 [ext_resource path="res://menus/ui.tres" type="Theme" id=6]
-[ext_resource path="res://menus/Abalone Smile.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://den/hooray.mp3" type="AudioStream" id=8]
 [ext_resource path="res://den/fail.mp3" type="AudioStream" id=9]
+[ext_resource path="res://den/den-1kid.png" type="Texture" id=10]
+[ext_resource path="res://den/den-3kids.png" type="Texture" id=11]
+[ext_resource path="res://den/den-2kids.png" type="Texture" id=12]
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0.450262 )
-colors = PoolColorArray( 0, 0.015625, 1, 1 )
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 685, 440 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 3 )
-width = 50
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 685, 0, 685, 440 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 685, 440 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 685, 0, 685, 440 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 685, 440 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 685, 0, 685, 440 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "1",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "2",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "3",
+"speed": 2.0
+} ]
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.67121, 1 )
@@ -60,8 +102,9 @@ color_ramp = SubResource( 13 )
 hue_variation = 0.05
 hue_variation_random = 0.5
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 65.0
+[sub_resource type="CapsuleShape2D" id=24]
+radius = 71.0
+height = 42.0
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.796078, 0.796078, 0.796078, 1 )
@@ -104,21 +147,19 @@ colors = PoolColorArray( 1, 0, 0, 1 )
 [sub_resource type="GradientTexture2D" id=8]
 gradient = SubResource( 7 )
 
-[sub_resource type="DynamicFont" id=18]
-size = 25
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 7 )
-
 [node name="Den" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 3.53, 147.5 )
-texture = SubResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -6 )
+scale = Vector2( 0.4, 0.4 )
+frames = SubResource( 23 )
+animation = "3"
+frame = 1
+playing = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0, -25 )
+position = Vector2( 0, -97 )
 scale = Vector2( 4, 4 )
 emitting = false
 amount = 5
@@ -133,7 +174,9 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
+position = Vector2( 0, 9 )
+rotation = 1.5708
+shape = SubResource( 24 )
 
 [node name="PowerupPosition" type="Position2D" parent="."]
 position = Vector2( 0, 137 )
@@ -207,29 +250,6 @@ size_flags_horizontal = 4
 texture_under = SubResource( 6 )
 texture_progress = SubResource( 8 )
 fill_mode = 4
-
-[node name="Health" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = 38.0
-margin_right = 100.0
-margin_bottom = 59.0
-mouse_filter = 2
-theme = ExtResource( 6 )
-
-[node name="Label" type="Label" parent="Health"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -53.5
-margin_right = 53.5
-margin_bottom = 42.0
-grow_horizontal = 2
-custom_fonts/font = SubResource( 18 )
-text = "Lives: 3"
-align = 1
 
 [node name="RequestTimer" type="Timer" parent="."]
 wait_time = 30.0

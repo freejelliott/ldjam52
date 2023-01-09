@@ -5,6 +5,7 @@ var PowerupScene = preload('res://powerups/Powerup.tscn')
 
 signal no_lives
 
+onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var request_timer: Timer = $RequestTimer
 onready var new_request_timer: Timer = $NewRequestTimer
 onready var request: PanelContainer = $Request
@@ -13,7 +14,6 @@ onready var request_container: GridContainer = $Request/VBoxContainer/GridContai
 onready var template_tomato : TextureRect = $Request/VBoxContainer/GridContainer/TemplateTomato
 onready var template_potato : TextureRect = $Request/VBoxContainer/GridContainer/TemplatePotato
 onready var template_carrot : TextureRect = $Request/VBoxContainer/GridContainer/TemplateCarrot
-onready var health_bar : Label = $Health/Label
 onready var particles: Particles2D = $Particles2D
 onready var powerup_position: Position2D = $PowerupPosition
 onready var tween: Tween = $Tween
@@ -31,7 +31,6 @@ var stats = PlayerStats
 
 func _ready() -> void:
     request.visible = false
-    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
     for child in request_container.get_children():
         request_container.remove_child(child)
 
@@ -55,14 +54,18 @@ func cancel_request() -> void:
     request.visible = false
 
 func _on_child_health_changed(health):
-    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
+    match PlayerStats.child_lives:
+        1:
+            sprite.animation = '1'
+        2:
+            sprite.animation = '2'
+        3:
+            sprite.animation = '3'
 
 func _on_RequestTimer_timeout() -> void:
     print('Den request timed out')
     fail_audio.play()
     PlayerStats.child_lives -= 1
-    # TODO: show lives as number of children in the den.
-    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
     if PlayerStats.child_lives == 0:
         emit_signal('no_lives')
     cancel_request()
