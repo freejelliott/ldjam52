@@ -3,12 +3,16 @@ extends Node
 export(int) var max_health = 3
 onready var health = max_health setget set_health
 
+export(int) var child_max_lives = 3
+onready var child_lives = child_max_lives setget set_child_lives
+
 onready var score = 0 setget set_score
 onready var powerup_boots = 0 setget set_powerup_boots
 onready var powerup_baskets = 0 setget set_powerup_baskets
 
 signal no_health
 signal health_changed(value)
+signal child_health_changed(value)
 
 signal score_changed(value)
 
@@ -22,6 +26,10 @@ func set_health(value) -> void:
     if health <= 0:
         emit_signal("no_health")
 
+func set_child_lives(value) -> void:
+    child_lives = value
+    emit_signal("child_lives_changed", child_lives)
+    
 func reset() -> void:
     health = max_health
     score = 0
