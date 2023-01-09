@@ -11,7 +11,6 @@ onready var game_over = $Menus/GameOver
 
 onready var play_screen = $PlayScreen
 onready var hud = $PlayScreen/HUD
-onready var audio_player = $AudioStreamPlayer
 
 onready var spawn_start : Vector2 = $PlayScreen/VegetableSpawnTopLeft.position
 onready var spawn_end : Vector2 = $PlayScreen/VegetableSpawnBottomRight.position

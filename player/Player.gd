@@ -6,9 +6,9 @@ var Vegetable = preload('res://vegetable/Vegetable.gd')
 
 # The first basket in the array is closeset to the player.
 var baskets: Array = []
-var holding_vegetable = null
+var held_vegetable = null
 
-export var speed = 200
+export var speed = 500#150
 
 export var boot_bonus_speed = 50
 
@@ -22,9 +22,6 @@ onready var timer = $InvinciblityTimer
 onready var area: Area2D = $Area2D
 signal invincibility_started
 signal invincibility_ended
-
-func _ready() -> void:
-    pass#var basket = spawn_basket()
 
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
@@ -82,8 +79,12 @@ func lose_basket(basket_to_lose: Node2D):
             PlayerStats.powerup_baskets -= 1
             return
 
+func set_held_vegetable(vegetable) -> void:
+    held_vegetable = vegetable
+    update_held_sprite()
+
 func update_held_sprite() -> void:
-    match holding_vegetable:
+    match held_vegetable:
         Vegetable.VegetableType.Potato:
             vegetable_sprite.animation = 'Potato'
         Vegetable.VegetableType.Tomato:
@@ -95,31 +96,29 @@ func update_held_sprite() -> void:
 
 func drop_off_vegetables(veges_to_drop: Dictionary):
     # TODO: shift vegetables up baskets?
-    if holding_vegetable in veges_to_drop:
-        veges_to_drop[holding_vegetable] -= 1
-        if veges_to_drop[holding_vegetable] == 0:
-            veges_to_drop.erase(holding_vegetable)
-        holding_vegetable = null
-        update_held_sprite()
+    if held_vegetable in veges_to_drop:
+        veges_to_drop[held_vegetable] -= 1
+        if veges_to_drop[held_vegetable] == 0:
+            veges_to_drop.erase(held_vegetable)
+        set_held_vegetable(null)
 
     for basket in baskets:
-        if basket.holding_vegetable in veges_to_drop:
-            veges_to_drop[basket.holding_vegetable] -= 1
-            if veges_to_drop[basket.holding_vegetable] == 0:
-                veges_to_drop.erase(basket.holding_vegetable)
-            basket.holding_vegetable = null
+        if basket.held_vegetable in veges_to_drop:
+            veges_to_drop[basket.held_vegetable] -= 1
+            if veges_to_drop[basket.held_vegetable] == 0:
+                veges_to_drop.erase(basket.held_vegetable)
+            basket.held_vegetable = null
 
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1 << 1:
         var vegetable = area.get_parent()
-        if holding_vegetable == null:
-            holding_vegetable = vegetable.vegetable_type
-            update_held_sprite()
+        if held_vegetable == null:
+            set_held_vegetable(vegetable.vegetable_type)
             vegetable.queue_free()
         else:
             for basket in baskets:
-                if basket.holding_vegetable == null:
-                    basket.holding_vegetable = vegetable.vegetable_type
+                if basket.held_vegetable == null:
+                    basket.held_vegetable = vegetable.vegetable_type
                     # TODO: make vegetable fly to basket?
                     vegetable.queue_free()
                     break

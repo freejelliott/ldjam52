@@ -2,7 +2,7 @@ extends Node2D
 
 var Vegetable = preload('res://vegetable/Vegetable.gd')
 
-var holding_vegetable = null
+var held_vegetable = null
 
 export var speed = 10
 export var follow_distance = 50
@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
         if velocity.length() > follow_distance:
             position += (velocity - direction * follow_distance) * speed * delta
 
-    match holding_vegetable:
+    match held_vegetable:
         Vegetable.VegetableType.Tomato:
             sprite.animation = 'Tomato'
         Vegetable.VegetableType.Potato:

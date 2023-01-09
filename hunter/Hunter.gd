@@ -28,19 +28,23 @@ func _physics_process(delta: float) -> void:
         # Hunter goes home.
         follow_target = home
     else:
-        # Hunter follows the closest full basket the player is carrying or stands still if
-        # nothing is being carried.
-        var closest_basket
-        var distance_to_closest_basket = 999999999999999
+        # Hunter follows the player or the closest full basket the player is
+        # carrying or stands still if nothing is being carried.
+
+        var distance_to_closest_target: float
+        if player.held_vegetable != null:
+            follow_target = player
+            distance_to_closest_target = (player.position - position).length()
+        else:
+            distance_to_closest_target = 9999999999999 # kek
+
         for basket in player.get_baskets():
-            if basket.holding_vegetable == null:
+            if basket.held_vegetable == null:
                 continue
             var distance = (basket.position - position).length()
-            if distance < distance_to_closest_basket:
-                distance_to_closest_basket = distance
-                closest_basket = basket
-
-        follow_target = closest_basket
+            if distance < distance_to_closest_target:
+                distance_to_closest_target = distance
+                follow_target = basket
 
     if follow_target:
         var velocity = follow_target.position - position
@@ -60,23 +64,34 @@ func _physics_process(delta: float) -> void:
         sprite.playing = false
 
 
+func start_eating() -> void:
+    print('hunter is eating')
+    area.set_deferred('monitoring', false)
+    audio.playing = false
+    sprite.animation = 'eating'
+    eating_timer.start()
+
+
 func _on_Area2D_area_entered(other_area:Area2D) -> void:
     if other_area.collision_layer == (1 << 5):
         if hurt:
             print('hunter is resting')
             area.set_deferred('monitoring', false)
             rest_timer.start()
+    elif other_area.collision_layer == 1:
+        if !hurt:
+            var player = other_area.get_parent()
+            if player.held_vegetable == null:
+                return
+            player.set_held_vegetable(null)
+            start_eating()
     else:
         if !hurt:
             var basket = other_area.get_parent()
-            if basket.holding_vegetable == null:
+            if basket.held_vegetable == null:
                 return
-            area.set_deferred('monitoring', false)
             player.lose_basket(basket)
-            print('hunter is eating')
-            audio.playing = false
-            sprite.animation = 'eating'
-            eating_timer.start()
+            start_eating()
 
 
 func stun() -> void:
