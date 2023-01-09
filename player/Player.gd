@@ -16,6 +16,7 @@ onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var vegetable_sprite: AnimatedSprite = $VegetableSprite
 onready var blink_animation: AnimationPlayer = $BlinkAnimation
 onready var death_animation: AnimationPlayer = $DeathAnimation
+onready var audio = $AudioStreamPlayer
 
 # Invincibility stuff
 var invincible = false setget set_invincible
@@ -137,6 +138,11 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
             PlayerStats.powerup_baskets += 1
             spawn_basket()
         powerup.queue_free()
+
+func hurt() -> void:
+    PlayerStats.health -= 1
+    start_invincibility(3)
+    audio.play()
 
 func die() -> void:
     blink_animation.stop()

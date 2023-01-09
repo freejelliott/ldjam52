@@ -76,8 +76,7 @@ func _physics_process(delta: float) -> void:
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
-        stats.health -= 1
-        player.start_invincibility(3)
+        player.hurt()
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
         var vegetable = area.get_parent()
