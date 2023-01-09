@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/dog.wav-04276192c77f2d283cb25a2df42c9ef8.sample"
+path="res://.import/dog.wav-cad0ac67192994f5cd34dd67f4f269c6.sample"
 
 [deps]
 
-source_file="res://dog.wav"
-dest_files=[ "res://.import/dog.wav-04276192c77f2d283cb25a2df42c9ef8.sample" ]
+source_file="res://hunter/dog.wav"
+dest_files=[ "res://.import/dog.wav-cad0ac67192994f5cd34dd67f4f269c6.sample" ]
 
 [params]
 

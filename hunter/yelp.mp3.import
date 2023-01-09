@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/yelp.mp3-f1ef87c5659c122624c18cd0d56a0acc.mp3str"
+
+[deps]
+
+source_file="res://hunter/yelp.mp3"
+dest_files=[ "res://.import/yelp.mp3-f1ef87c5659c122624c18cd0d56a0acc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
