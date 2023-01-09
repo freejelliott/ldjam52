@@ -20,9 +20,9 @@ onready var tween: Tween = $Tween
 onready var hooray_audio = $HooraySound
 onready var fail_audio = $FailSound
 
-export var max_lives = 3
+#export var max_lives = 3
 
-onready var lives = max_lives
+#onready var lives = max_lives
 
 var first_request_given = false
 
@@ -31,7 +31,7 @@ var stats = PlayerStats
 
 func _ready() -> void:
     request.visible = false
-    health_bar.text = 'Lives: %d' % lives
+    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
     for child in request_container.get_children():
         request_container.remove_child(child)
 
@@ -55,10 +55,10 @@ func cancel_request() -> void:
 func _on_RequestTimer_timeout() -> void:
     print('Den request timed out')
     fail_audio.play()
-    lives -= 1
+    PlayerStats.child_lives -= 1
     # TODO: show lives as number of children in the den.
-    health_bar.text = 'Lives: %d' % lives
-    if lives == 0:
+    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
+    if PlayerStats.child_lives == 0:
         emit_signal('no_lives')
     cancel_request()
 
