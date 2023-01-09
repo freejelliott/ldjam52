@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HealthUI.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://doghouse-02.png" type="Texture" id=18]
 [ext_resource path="res://random filler rocks.png" type="Texture" id=19]
 [ext_resource path="res://HUD/PowerupUI.tscn" type="PackedScene" id=20]
+[ext_resource path="res://vegetable/Vegetable.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 1866.25, 68.25 )
@@ -329,7 +330,11 @@ position = Vector2( 504, 464 )
 [node name="VegetableSpawnBottomRight" type="Position2D" parent="PlayScreen"]
 position = Vector2( 3286, 2732 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Vegetable" parent="PlayScreen" instance=ExtResource( 21 )]
+position = Vector2( 2269, 2013 )
+vegetable_type = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 14 )
 autoplay = true

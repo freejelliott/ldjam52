@@ -22,6 +22,8 @@ export var max_lives = 3
 
 onready var lives = max_lives
 
+var first_request_given = false
+
 var requested_vegetables: Dictionary = {}
 var stats = PlayerStats
 
@@ -32,7 +34,7 @@ func _ready() -> void:
         request_container.remove_child(child)
 
     # TODO: remove
-    call_deferred('debug_spawn_powerups')
+    #call_deferred('debug_spawn_powerups')
 
 func debug_spawn_powerups():
     for i in 5:
@@ -76,13 +78,25 @@ func update_request() -> void:
 
 
 func _on_NewRequestTimer_timeout() -> void:
-    # TODO: difficulty based on number of baskets? score? time?
-    for i in rand_range(1, 3):
-        var vegetable_type = Vegetable.VegetableType.values()[rand_range(0, Vegetable.VegetableType.size())]
-        if vegetable_type in requested_vegetables:
-            requested_vegetables[vegetable_type] += 1
-        else:
-            requested_vegetables[vegetable_type] = 1
+    if !first_request_given:
+        first_request_given = true
+        # The first request is intentionally very easy.
+        requested_vegetables[Vegetable.VegetableType.Carrot] = 1
+    elif PlayerStats.score == 0:
+        var vegetable_type = Vegetable.get_random_vegetable_type()
+        requested_vegetables[vegetable_type] = 1
+    else:
+        var carry_slots : float = PlayerStats.powerup_baskets + 1
+        var score : float = PlayerStats.score
+        var min_items = carry_slots*score/30 + score/10
+        var max_items = carry_slots*2*(score/30) + score/5
+        print('request range is %f to %f' % [min_items, max_items])
+        for i in rand_range(min_items, max_items):
+            var vegetable_type = Vegetable.get_random_vegetable_type()
+            if vegetable_type in requested_vegetables:
+                requested_vegetables[vegetable_type] += 1
+            else:
+                requested_vegetables[vegetable_type] = 1
 
     print('Den wants %s' % [requested_vegetables])
     request_timer.start()

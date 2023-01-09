@@ -21,6 +21,8 @@ var min_vegetable_distance_between = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    randomize()
+
     PlayerStats.connect("no_health", self, "_on_player_no_health")
 
     play_screen.get_tree().paused = true
@@ -68,7 +70,7 @@ func _on_VegetableSpawnTimer_timeout() -> void:
             rarest_vegetable = vegetable
 
     if !rarest_vegetable:
-        rarest_vegetable = Vegetable.VegetableType.values()[rand_range(0, new_vegetable.VegetableType.size())]
+        rarest_vegetable = Vegetable.get_random_vegetable_type()
 
     new_vegetable.vegetable_type = rarest_vegetable
 

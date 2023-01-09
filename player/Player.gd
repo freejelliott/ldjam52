@@ -8,7 +8,9 @@ var Vegetable = preload('res://vegetable/Vegetable.gd')
 var baskets: Array = []
 var holding_vegetable = null
 
-export var speed = 100
+export var speed = 200
+
+export var boot_bonus_speed = 50
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var vegetable_sprite: AnimatedSprite = $VegetableSprite
@@ -125,7 +127,7 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         var powerup = area.get_parent()
         if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:
             print('picked up boots')
-            speed += 50
+            speed += boot_bonus_speed
             PlayerStats.powerup_boots += 1
         elif powerup.powerup_type == Powerup.PowerupType.Basket:
             print('picked up basket')
