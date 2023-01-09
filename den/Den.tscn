@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Hearts V2.png" type="Texture" id=5]
 [ext_resource path="res://menus/ui.tres" type="Theme" id=6]
 [ext_resource path="res://menus/Abalone Smile.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://den/hooray.mp3" type="AudioStream" id=8]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.450262 )
@@ -239,6 +240,11 @@ one_shot = true
 autostart = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="HooraySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 4.37
+attenuation = 1.68179
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]

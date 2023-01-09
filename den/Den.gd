@@ -17,6 +17,7 @@ onready var health_bar : Label = $Health/Label
 onready var particles: Particles2D = $Particles2D
 onready var powerup_position: Position2D = $PowerupPosition
 onready var tween: Tween = $Tween
+onready var hooray_audio = $HooraySound
 
 export var max_lives = 3
 
@@ -125,6 +126,7 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
 
     if requested_vegetables.empty():
         print('request complete')
+        hooray_audio.play()
         particles.emitting = true
         stats.score += 1
         cancel_request()

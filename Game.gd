@@ -45,7 +45,6 @@ func _on_Den_no_lives() -> void:
 
 func _on_VegetableSpawnTimer_timeout() -> void:
     var existing_vegetables = get_tree().get_nodes_in_group('vegetables')
-    print('num vegetables: %d' % existing_vegetables.size())
     if existing_vegetables.size() > max_vegetables:
         return
 

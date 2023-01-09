@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hooray.mp3-b5b8f9ddfd27b704a368a5c94a7b546a.mp3str"
+
+[deps]
+
+source_file="res://den/hooray.mp3"
+dest_files=[ "res://.import/hooray.mp3-b5b8f9ddfd27b704a368a5c94a7b546a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

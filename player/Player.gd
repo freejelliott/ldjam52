@@ -22,8 +22,6 @@ onready var audio = $AudioStreamPlayer
 var invincible = false setget set_invincible
 onready var timer = $InvinciblityTimer
 onready var area: Area2D = $Area2D
-signal invincibility_started
-signal invincibility_ended
 
 func _physics_process(delta: float) -> void:
     if PlayerStats.health == 0:
@@ -91,7 +89,7 @@ func set_held_vegetable(vegetable) -> void:
 func update_held_sprite() -> void:
     match held_vegetable:
         Vegetable.VegetableType.Potato:
-            vegetable_sprite.blink_animation = 'Potato'
+            vegetable_sprite.animation = 'Potato'
         Vegetable.VegetableType.Tomato:
             vegetable_sprite.animation = 'Tomato'
         Vegetable.VegetableType.Carrot:
@@ -140,9 +138,10 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         powerup.queue_free()
 
 func hurt() -> void:
-    PlayerStats.health -= 1
-    start_invincibility(3)
-    audio.play()
+    if !invincible:
+        PlayerStats.health -= 1
+        start_invincibility(3)
+        audio.play()
 
 func die() -> void:
     blink_animation.stop()
@@ -167,12 +166,4 @@ func start_invincibility(duration):
 
 func _on_InvinciblityTimer_timeout():
     self.invincible = false
-
-func _on_Player_invincibility_started():
-    print("Invincibility started")
-    area.set_deferred("monitorable", false)
-
-func _on_Player_invincibility_ended():
-    print("Invincibility ended")
-    area.monitorable = true
     blink_animation.stop(true)
