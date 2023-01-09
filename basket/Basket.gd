@@ -7,9 +7,9 @@ var held_vegetable = null
 export var speed = 10
 export var follow_distance = 50
 
-onready var sprite : AnimatedSprite = $VegetableSprite
+onready var sprite : AnimatedSprite = $Bob/VegetableSprite
 onready var animation = $AnimationPlayer
-onready var area = $Area2D
+onready var area = $Bob/Area2D
 
 var follow_target: Node2D
 

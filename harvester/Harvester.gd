@@ -87,5 +87,5 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         hunter.stun()
     elif area.collision_layer == 1 << 3:
         # Basket
-        var basket = area.get_parent()
+        var basket = area.get_parent().get_parent()
         player.lose_basket(basket)

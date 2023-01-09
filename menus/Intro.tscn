@@ -1,8 +1,124 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://menus/ui.tres" type="Theme" id=1]
 [ext_resource path="res://menus/Intro.gd" type="Script" id=2]
 [ext_resource path="res://menus/typing.mp3" type="AudioStream" id=3]
+[ext_resource path="res://vegetable/potato.png" type="Texture" id=4]
+[ext_resource path="res://vegetable/tomato.png" type="Texture" id=5]
+[ext_resource path="res://vegetable/carrot.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 370, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 740, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 1110, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 1480, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 1850, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 370, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 740, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1110, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1480, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1850, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 370, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 740, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 1110, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 1480, 0, 370, 370 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 1850, 0, 370, 370 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "Carrot",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "None",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 28 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "Potato",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "Tomato",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -172,6 +288,26 @@ margin_right = -10.0
 margin_bottom = -44.0
 text = "Click to continue"
 autowrap = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Panel"]
+position = Vector2( 202, 898 )
+frames = SubResource( 23 )
+animation = "Carrot"
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Panel"]
+position = Vector2( 594, 922 )
+frames = SubResource( 23 )
+animation = "Potato"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="Panel"]
+position = Vector2( 978, 922 )
+frames = SubResource( 23 )
+animation = "Tomato"
+frame = 5
+playing = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
