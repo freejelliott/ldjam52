@@ -70,6 +70,7 @@ func lose_basket(basket_to_lose: Node2D):
                 baskets[i+1].set_follow_target(basket_to_lose.follow_target)
             baskets.pop_at(i)
             basket_to_lose.destroy()
+            PlayerStats.powerup_baskets -= 1
             return
 
 func drop_off_vegetables(veges_to_drop: Dictionary):
@@ -95,8 +96,10 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
         if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:
             print('picked up boots')
             speed += 50
+            PlayerStats.powerup_boots += 1
         elif powerup.powerup_type == Powerup.PowerupType.Basket:
             print('picked up basket')
+            PlayerStats.powerup_baskets += 1
             spawn_basket()
         powerup.queue_free()
 
