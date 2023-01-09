@@ -47,9 +47,8 @@ animation = "Side"
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 15
-monitorable = false
 
 [node name="UpCollision" type="CollisionPolygon2D" parent="Area2D"]
 visible = false
@@ -77,5 +76,7 @@ stream = ExtResource( 2 )
 volume_db = 4.0
 autoplay = true
 attenuation = 1.86607
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

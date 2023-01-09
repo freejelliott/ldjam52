@@ -60,12 +60,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Area2D_area_entered(other_area:Area2D) -> void:
-    if other_area.collision_layer == (1 << 5):
+    if other_area.collision_layer == 1 << 5:
         if hurt:
             print('hunter is resting')
             area.set_deferred('monitoring', false)
             rest_timer.start()
-    else:
+    elif other_area.collision_layer == 1 << 3:
         if !hurt:
             var basket = other_area.get_parent()
             if basket.holding_vegetable == null:

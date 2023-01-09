@@ -214,13 +214,15 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 19 )
 
 [node name="Player" parent="PlayScreen" instance=ExtResource( 1 )]
-position = Vector2( 2529, 2390 )
+position = Vector2( 941, 453 )
+scale = Vector2( 0.998608, 1 )
 
 [node name="Den" parent="PlayScreen" instance=ExtResource( 3 )]
 position = Vector2( 2752, 2282 )
 
 [node name="Harvester" parent="PlayScreen" instance=ExtResource( 4 )]
-position = Vector2( 2220.62, 2348.06 )
+position = Vector2( 2149, 2233 )
+scale = Vector2( 1.07613, 1.17164 )
 player_path = NodePath("../Player")
 path_path = NodePath("../HarvesterPath")
 
