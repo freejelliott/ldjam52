@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/health hearts (reference).png-eb302f3bb5f609ac708416af920499be.stex"
+path="res://.import/health hearts (reference).png-348f2774aa390f271e77dc41c451bff6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://health hearts (reference).png"
-dest_files=[ "res://.import/health hearts (reference).png-eb302f3bb5f609ac708416af920499be.stex" ]
+source_file="res://HUD/health hearts (reference).png"
+dest_files=[ "res://.import/health hearts (reference).png-348f2774aa390f271e77dc41c451bff6.stex" ]
 
 [params]
 

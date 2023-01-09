@@ -34,13 +34,13 @@ func _on_player_no_health() -> void:
     yield(player.die(), "completed")
     play_screen.get_tree().paused = true
     hud.visible = false
-    game_over.reason.text = 'You died.'
+    game_over.reason = 'died'
     game_over.visible = true
 
 func _on_Den_no_lives() -> void:
     play_screen.get_tree().paused = true
     hud.visible = false
-    game_over.reason.text = 'Your children all died.'
+    game_over.reason = 'child'
     game_over.visible = true
 
 func _on_VegetableSpawnTimer_timeout() -> void:

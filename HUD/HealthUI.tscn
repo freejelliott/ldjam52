@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD/HealthUI.gd" type="Script" id=1]
-[ext_resource path="res://HUD/heart1.png" type="Texture" id=2]
-[ext_resource path="res://HUD/heart3.png" type="Texture" id=3]
-[ext_resource path="res://HUD/heart2.png" type="Texture" id=4]
+[ext_resource path="res://HUD/blank lives counter-05.png" type="Texture" id=2]
+[ext_resource path="res://Hearts V2.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0 )
@@ -41,45 +40,41 @@ value = 100.0
 texture_under = SubResource( 1 )
 texture_progress = SubResource( 4 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -465.0
-margin_top = -275.0
-margin_right = -7.0
-margin_bottom = 25.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 2
-
-[node name="Heart1" type="TextureRect" parent="HBoxContainer"]
-margin_right = 150.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 150, 300 )
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="HeartsBackground" type="Sprite" parent="."]
+position = Vector2( 1693, 1007 )
+scale = Vector2( 2, 2.16092 )
 texture = ExtResource( 2 )
-expand = true
-stretch_mode = 6
 
-[node name="Heart2" type="TextureRect" parent="HBoxContainer"]
-margin_left = 154.0
-margin_right = 304.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 150, 300 )
+[node name="Heart3" type="TextureRect" parent="."]
+margin_left = 1519.0
+margin_top = 959.0
+margin_right = 1619.0
+margin_bottom = 1059.0
+rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="Heart3" type="TextureRect" parent="HBoxContainer"]
-margin_left = 308.0
-margin_right = 458.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 150, 300 )
+[node name="Heart2" type="TextureRect" parent="."]
+margin_left = 1649.0
+margin_top = 959.0
+margin_right = 1749.0
+margin_bottom = 1059.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Heart1" type="TextureRect" parent="."]
+margin_left = 1779.0
+margin_top = 959.0
+margin_right = 1879.0
+margin_bottom = 1059.0
+rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 3 )
