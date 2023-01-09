@@ -11,13 +11,14 @@ onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var eating_timer: Timer = $EatingTimer
 onready var stun_timer: Timer = $StunTimer
 onready var rest_timer: Timer = $RestTimer
+onready var sniff_audio: AudioStreamPlayer2D = $SniffSound
 onready var barking_audio: AudioStreamPlayer2D = $BarkingSound
 onready var yelp_audio: AudioStreamPlayer2D = $YelpSound
 
 var hurt = false
 
 func _ready() -> void:
-    barking_audio.play(rand_range(0, barking_audio.stream.get_length()))
+    sniff_audio.play(rand_range(0, sniff_audio.stream.get_length()))
 
 func _physics_process(delta: float) -> void:
     if !eating_timer.is_stopped() or !stun_timer.is_stopped() or !rest_timer.is_stopped():
@@ -68,8 +69,9 @@ func _physics_process(delta: float) -> void:
 func start_eating() -> void:
     print('hunter is eating')
     area.set_deferred('monitoring', false)
-    barking_audio.playing = false
+    sniff_audio.playing = false
     sprite.animation = 'eating'
+    sprite.playing = true
     eating_timer.start()
 
 
@@ -77,6 +79,7 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
     if other_area.collision_layer == (1 << 5):
         if hurt:
             print('hunter is resting')
+            sprite.animation = 'sleeping'
             area.set_deferred('monitoring', false)
             rest_timer.start()
     elif other_area.collision_layer == 1:
@@ -98,18 +101,22 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
 
 func stun() -> void:
     hurt = true
-    barking_audio.playing = false
+    sniff_audio.playing = false
     yelp_audio.play()
+    barking_audio.play()
     sprite.modulate = Color(1, 1, 1, 0.5)
     area.set_deferred('monitorable', false)
     area.set_deferred('monitoring', false)
     print('hunter is stunned')
+    sprite.animation = 'hurt'
+    sprite.playing = true
     stun_timer.start()
+    eating_timer.stop()
 
 
 func _on_EatingTimer_timeout() -> void:
     print('hunter finished eating')
-    barking_audio.playing = true
+    sniff_audio.playing = true
     sprite.animation = 'default'
     area.monitoring = true
 
@@ -117,6 +124,8 @@ func _on_EatingTimer_timeout() -> void:
 func _on_StunTimer_timeout() -> void:
     print('hunter is no longer stunned')
     area.monitoring = true
+    sprite.animation = 'default'
+    sprite.playing = true
 
 
 func _on_RestTimer_timeout() -> void:
@@ -124,5 +133,7 @@ func _on_RestTimer_timeout() -> void:
     area.monitoring = true
     area.monitorable = true
     hurt = false
-    barking_audio.playing = true
+    sniff_audio.playing = true
+    sprite.animation = 'default'
+    sprite.playing = true
     sprite.modulate = Color(1, 1, 1, 1)

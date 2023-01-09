@@ -1,10 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://hunter/Hunter.gd" type="Script" id=1]
 [ext_resource path="res://hunter/walking dog sprite.png" type="Texture" id=2]
 [ext_resource path="res://hunter/dog.wav" type="AudioStream" id=3]
 [ext_resource path="res://hunter/dog munching.png" type="Texture" id=4]
 [ext_resource path="res://hunter/yelp.mp3" type="AudioStream" id=5]
+[ext_resource path="res://hunter/sleepingdog.png" type="Texture" id=6]
+[ext_resource path="res://hunter/hurtdog.png" type="Texture" id=7]
+[ext_resource path="res://hunter/sniff.mp3" type="AudioStream" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -91,6 +94,56 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 11275, 0, 1025, 640 )
 
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 950, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 1900, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 2850, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 3800, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 4750, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 5700, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 6650, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 7600, 0, 950, 920 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 8550, 0, 950, 920 )
+
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
@@ -101,6 +154,16 @@ animations = [ {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "eating",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "sleeping",
 "speed": 5.0
 } ]
 
@@ -115,7 +178,7 @@ script = ExtResource( 1 )
 position = Vector2( 2.4, -9.53674e-07 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -147,6 +210,11 @@ attenuation = 1.68179
 [node name="YelpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = 4.37
+attenuation = 1.68179
+
+[node name="SniffSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 15.236
 attenuation = 1.68179
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
