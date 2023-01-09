@@ -35,6 +35,8 @@ func _ready() -> void:
     for child in request_container.get_children():
         request_container.remove_child(child)
 
+    PlayerStats.connect("child_health_changed", self, "_on_child_health_changed")
+
     # TODO: remove
     #call_deferred('debug_spawn_powerups')
 
@@ -51,6 +53,9 @@ func cancel_request() -> void:
     new_request_timer.start()
     request_timer.stop()
     request.visible = false
+
+func _on_child_health_changed(health):
+    health_bar.text = 'Lives: %d' % PlayerStats.child_lives
 
 func _on_RequestTimer_timeout() -> void:
     print('Den request timed out')

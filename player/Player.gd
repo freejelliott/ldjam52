@@ -135,6 +135,12 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
             print('picked up basket')
             PlayerStats.powerup_baskets += 1
             spawn_basket()
+        elif powerup.powerup_type == Powerup.PowerupType.ExtraLife:
+            print('picked up extra life')
+            PlayerStats.health += 1
+        elif powerup.powerup_type == Powerup.PowerupType.ExtraChildLife:
+            print('picked up extra child life')
+            PlayerStats.child_lives += 1
         powerup.queue_free()
 
 func hurt() -> void:

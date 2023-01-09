@@ -14,26 +14,16 @@ onready var sprite: Sprite = $Sprite
 onready var area: Area2D = $Area2D
 
 func _init() -> void:
-    # if health and lives max, only SpeedBoots and Basket available
-    if PlayerStats.health == 3 && PlayerStats.child_lives == 3:
-        powerup_type = PowerupType.values()[rand_range(0, PowerupType.size())-2]
-    # if health and lives less than max, all Powerups available
-    #elif PlayerStats.health < 3 && PlayerStats.child_lives < 3:
-        #powerup_type = PowerupType.values()[rand_range(0, PowerupType.size())]
-    
-    # if health is max, and child lives is low, all Powerups available except life
-    elif PlayerStats.health == 3 && PlayerStats.child_lives < 3:
-        # not working
-        powerup_type = PowerupType.values().remove(2)
-        powerup_type = PowerupType.values()[rand_range(0, PowerupType.size())]
-    
-    # if health is less than max, and child is max, all Powerups available except child lives
-    elif PlayerStats.health < 3 && PlayerStats.child_lives == 3:
-        powerup_type = PowerupType.values()[rand_range(0, PowerupType.size())-1]
-        
-    else:
-        powerup_type = PowerupType.values()[rand_range(0, PowerupType.size())]
-        
+    var possible_powerups = [PowerupType.SpeedBoots, PowerupType.Basket]
+
+    if PlayerStats.health < 3:
+        possible_powerups.append(PowerupType.ExtraLife)
+
+    if PlayerStats.child_lives < 3:
+        possible_powerups.append(PowerupType.ExtraChildLife)
+
+    powerup_type = possible_powerups[rand_range(0, possible_powerups.size())]
+
 
 func _ready() -> void:
     match powerup_type:

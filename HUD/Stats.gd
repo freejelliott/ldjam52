@@ -28,8 +28,8 @@ func set_health(value) -> void:
 
 func set_child_lives(value) -> void:
     child_lives = value
-    emit_signal("child_lives_changed", child_lives)
-    
+    emit_signal("child_health_changed", child_lives)
+
 func reset() -> void:
     health = max_health
     score = 0
