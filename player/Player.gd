@@ -28,16 +28,12 @@ onready var area: Area2D = $Area2D
 
 func _process(delta: float) -> void:
     var c = get_canvas_transform()
-    # var min_pos = -c.get_origin() / c.get_scale()
-    # print("min pos ", min_pos)
-
     var view_size = get_viewport_rect().size / c.get_scale()
 
     for e in nearby_enemies:
-        var v = e.position - position
+        var v = e.position - $Camera2D.get_camera_screen_center()
         var orig_v = v
-        var pos_trans = Vector2(v.x+view_size.x/2, v.y+view_size.y/2)
-        if Rect2(Vector2.ZERO, view_size).has_point(pos_trans):
+        if e.get_node("VisibilityNotifier2D").is_on_screen():
             nearby_enemies[e].visible = false
             continue
         else:
@@ -50,8 +46,9 @@ func _process(delta: float) -> void:
         var m = max(s.x, s.y)
         var sprite_scale = warning_size_radius / m
 
-        v.x = clamp(v.x, -view_size.x/2+warning_size_radius, view_size.x/2-warning_size_radius)
-        v.y = clamp(v.y, -view_size.y/2+warning_size_radius, view_size.y/2-warning_size_radius)
+        var z = position-$Camera2D.get_camera_screen_center()
+        v.x = clamp(v.x, -view_size.x/2+warning_size_radius-z.x, view_size.x/2-warning_size_radius-z.x)
+        v.y = clamp(v.y, -view_size.y/2+warning_size_radius-z.y, view_size.y/2-warning_size_radius-z.y)
         nearby_enemies[e].position = v
 
         var f = v.length() / orig_v.length()
