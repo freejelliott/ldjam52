@@ -2,13 +2,16 @@ extends KinematicBody2D
 
 var Powerup = preload('res://powerups/Powerup.gd')
 var BasketScene = preload('res://basket/Basket.tscn')
+var Vegetable = preload('res://vegetable/Vegetable.gd')
 
 # The first basket in the array is closeset to the player.
 var baskets: Array = []
+var holding_vegetable = null
 
 export var speed = 100
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
+onready var vegetable_sprite: AnimatedSprite = $VegetableSprite
 onready var animation:= $BlinkAnimation
 
 # Invincibility stuff
@@ -19,7 +22,7 @@ signal invincibility_started
 signal invincibility_ended
 
 func _ready() -> void:
-    var basket = spawn_basket()
+    pass#var basket = spawn_basket()
 
 func _physics_process(delta: float) -> void:
     var velocity = Vector2.ZERO
@@ -39,8 +42,12 @@ func _physics_process(delta: float) -> void:
     if velocity.x:
         if velocity.x > 0:
             sprite.scale.x = abs(sprite.scale.x)
+            vegetable_sprite.scale.x = abs(vegetable_sprite.scale.x)
+            vegetable_sprite.position.x = abs(vegetable_sprite.position.x)
         else:
             sprite.scale.x = -abs(sprite.scale.x)
+            vegetable_sprite.scale.x = -abs(vegetable_sprite.scale.x)
+            vegetable_sprite.position.x = -abs(vegetable_sprite.position.x)
 
     move_and_slide(velocity * speed)
 
@@ -73,8 +80,26 @@ func lose_basket(basket_to_lose: Node2D):
             PlayerStats.powerup_baskets -= 1
             return
 
+func update_held_sprite() -> void:
+    match holding_vegetable:
+        Vegetable.VegetableType.Potato:
+            vegetable_sprite.animation = 'Potato'
+        Vegetable.VegetableType.Tomato:
+            vegetable_sprite.animation = 'Tomato'
+        Vegetable.VegetableType.Carrot:
+            vegetable_sprite.animation = 'Carrot'
+        _:
+            vegetable_sprite.animation = 'None'
+
 func drop_off_vegetables(veges_to_drop: Dictionary):
     # TODO: shift vegetables up baskets?
+    if holding_vegetable in veges_to_drop:
+        veges_to_drop[holding_vegetable] -= 1
+        if veges_to_drop[holding_vegetable] == 0:
+            veges_to_drop.erase(holding_vegetable)
+        holding_vegetable = null
+        update_held_sprite()
+
     for basket in baskets:
         if basket.holding_vegetable in veges_to_drop:
             veges_to_drop[basket.holding_vegetable] -= 1
@@ -85,12 +110,17 @@ func drop_off_vegetables(veges_to_drop: Dictionary):
 func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1 << 1:
         var vegetable = area.get_parent()
-        for basket in baskets:
-            if basket.holding_vegetable == null:
-                basket.holding_vegetable = vegetable.vegetable_type
-                # TODO: make vegetable fly to basket?
-                vegetable.queue_free()
-                break
+        if holding_vegetable == null:
+            holding_vegetable = vegetable.vegetable_type
+            update_held_sprite()
+            vegetable.queue_free()
+        else:
+            for basket in baskets:
+                if basket.holding_vegetable == null:
+                    basket.holding_vegetable = vegetable.vegetable_type
+                    # TODO: make vegetable fly to basket?
+                    vegetable.queue_free()
+                    break
     elif area.collision_layer == 1 << 6:
         var powerup = area.get_parent()
         if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:

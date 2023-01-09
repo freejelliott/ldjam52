@@ -1,6 +1,7 @@
 extends Node2D
 
-var Vegetable = preload('res://vegetable/Vegetable.tscn')
+var VegetableScene = preload('res://vegetable/Vegetable.tscn')
+var Vegetable = preload('res://vegetable/Vegetable.gd')
 
 
 onready var main_menu = $Menus/MainMenu
@@ -14,6 +15,9 @@ onready var audio_player = $AudioStreamPlayer
 
 onready var spawn_start : Vector2 = $PlayScreen/VegetableSpawnTopLeft.position
 onready var spawn_end : Vector2 = $PlayScreen/VegetableSpawnBottomRight.position
+
+var max_vegetables = 20
+var min_vegetable_distance_between = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,12 +43,50 @@ func _on_Den_no_lives() -> void:
     #TODO: show the score
 
 func _on_VegetableSpawnTimer_timeout() -> void:
-    var new_vegetable = Vegetable.instance()
+    var existing_vegetables = get_tree().get_nodes_in_group('vegetables')
+    print('num vegetables: %d' % existing_vegetables.size())
+    if existing_vegetables.size() > max_vegetables:
+        return
 
-    new_vegetable.vegetable_type = new_vegetable.VegetableType.values()[rand_range(0, new_vegetable.VegetableType.size())]
-    new_vegetable.position.x = rand_range(spawn_start.x, spawn_end.x)
-    new_vegetable.position.y = rand_range(spawn_start.y, spawn_end.y)
-    add_child(new_vegetable)
+    var new_vegetable = VegetableScene.instance()
+
+    # Make this vegetable the rarest existing vegetable type.
+    var vegetable_counts = {}
+
+    for vegetable_type in Vegetable.VegetableType.values():
+        vegetable_counts[vegetable_type] = 0
+
+    for vegetable in existing_vegetables:
+        vegetable_counts[vegetable.vegetable_type] += 1
+
+    var rarest_vegetable
+    var rarest_vegetable_count = max_vegetables
+
+    for vegetable in vegetable_counts:
+        if vegetable_counts[vegetable] < rarest_vegetable_count:
+            rarest_vegetable_count = vegetable_counts[vegetable]
+            rarest_vegetable = vegetable
+
+    if !rarest_vegetable:
+        rarest_vegetable = Vegetable.VegetableType.values()[rand_range(0, new_vegetable.VegetableType.size())]
+
+    new_vegetable.vegetable_type = rarest_vegetable
+
+    while true:
+        new_vegetable.position.x = rand_range(spawn_start.x, spawn_end.x)
+        new_vegetable.position.y = rand_range(spawn_start.y, spawn_end.y)
+
+        var reposition = false
+        # Don't spawn vegetables too close together.
+        for vegetable in existing_vegetables:
+            var distance = (vegetable.position - new_vegetable.position).length()
+            if distance < min_vegetable_distance_between:
+                reposition = true
+                break
+
+        if !reposition:
+            add_child(new_vegetable)
+            break
 
 
 func _on_MainMenu_start_game() -> void:

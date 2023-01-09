@@ -11,11 +11,12 @@ onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var eating_timer: Timer = $EatingTimer
 onready var stun_timer: Timer = $StunTimer
 onready var rest_timer: Timer = $RestTimer
+onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var hurt = false
 
 func _ready() -> void:
-    $AudioStreamPlayer2D.play(rand_range(0, $AudioStreamPlayer2D.stream.get_length()))
+    audio.play(rand_range(0, $AudioStreamPlayer2D.stream.get_length()))
 
 func _physics_process(delta: float) -> void:
     if !eating_timer.is_stopped() or !stun_timer.is_stopped() or !rest_timer.is_stopped():
@@ -73,12 +74,14 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
             area.set_deferred('monitoring', false)
             player.lose_basket(basket)
             print('hunter is eating')
+            audio.playing = false
             sprite.animation = 'eating'
             eating_timer.start()
 
 
 func stun() -> void:
     hurt = true
+    audio.playing = false
     sprite.modulate = Color(1, 1, 1, 0.5)
     area.set_deferred('monitorable', false)
     area.set_deferred('monitoring', false)
@@ -88,6 +91,7 @@ func stun() -> void:
 
 func _on_EatingTimer_timeout() -> void:
     print('hunter finished eating')
+    audio.playing = true
     sprite.animation = 'default'
     area.monitoring = true
 
@@ -102,4 +106,5 @@ func _on_RestTimer_timeout() -> void:
     area.monitoring = true
     area.monitorable = true
     hurt = false
+    audio.playing = true
     sprite.modulate = Color(1, 1, 1, 1)
