@@ -20,10 +20,6 @@ onready var tween: Tween = $Tween
 onready var hooray_audio = $HooraySound
 onready var fail_audio = $FailSound
 
-#export var max_lives = 3
-
-#onready var lives = max_lives
-
 var first_request_given = false
 
 var requested_vegetables: Dictionary = {}
@@ -37,7 +33,6 @@ func _ready() -> void:
 
     PlayerStats.connect("child_health_changed", self, "_on_child_health_changed")
 
-    # TODO: remove
     #call_deferred('debug_spawn_powerups')
 
 func debug_spawn_powerups():

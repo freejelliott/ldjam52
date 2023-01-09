@@ -32,6 +32,7 @@ func set_child_lives(value) -> void:
 
 func reset() -> void:
     health = max_health
+    child_lives = child_max_lives
     score = 0
     powerup_boots = 0
     powerup_baskets = 0
