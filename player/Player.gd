@@ -130,7 +130,7 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
                     vegetable.queue_free()
                     break
     elif area.collision_layer == 1 << 6:
-        var powerup = area.get_parent()
+        var powerup = area.get_parent().get_parent()
         if powerup.powerup_type == Powerup.PowerupType.SpeedBoots:
             print('picked up boots')
             speed += boot_bonus_speed

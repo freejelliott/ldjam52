@@ -10,8 +10,8 @@ enum PowerupType {
 
 export(PowerupType) var powerup_type
 
-onready var sprite: AnimatedSprite = $AnimatedSprite
-onready var area: Area2D = $Area2D
+onready var sprite: AnimatedSprite = $Bob/AnimatedSprite
+onready var area: Area2D = $Bob/Area2D
 
 func _init() -> void:
     var possible_powerups = [PowerupType.SpeedBoots, PowerupType.Basket]

@@ -88,7 +88,7 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
             start_eating()
     else:
         if !hurt:
-            var basket = other_area.get_parent()
+            var basket = other_area.get_parent().get_parent()
             if basket.held_vegetable == null:
                 return
             basket.held_vegetable = null
