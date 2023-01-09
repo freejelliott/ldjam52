@@ -266,7 +266,8 @@ position = Vector2( 2385, 2654 )
 position = Vector2( 2688, 2514 )
 
 [node name="Harvester" parent="PlayScreen" instance=ExtResource( 4 )]
-position = Vector2( 2220.62, 2348.06 )
+position = Vector2( 2149, 2233 )
+scale = Vector2( 1.07613, 1.17164 )
 player_path = NodePath("../Player")
 path_path = NodePath("../HarvesterPath")
 

@@ -74,7 +74,7 @@ func start_eating() -> void:
 
 
 func _on_Area2D_area_entered(other_area:Area2D) -> void:
-    if other_area.collision_layer == (1 << 5):
+    if other_area.collision_layer == 1 << 5:
         if hurt:
             print('hunter is resting')
             area.set_deferred('monitoring', false)
@@ -86,7 +86,7 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
                 return
             player.set_held_vegetable(null)
             start_eating()
-    else:
+    elif other_area.collision_layer == 1 << 3:
         if !hurt:
             var basket = other_area.get_parent()
             if basket.held_vegetable == null:

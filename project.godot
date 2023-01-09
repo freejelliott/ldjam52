@@ -77,6 +77,7 @@ click={
 2d_physics/layer_5="fence"
 2d_physics/layer_6="hunter home"
 2d_physics/layer_7="powerups"
+2d_physics/layer_8="harvester"
 
 [physics]
 
