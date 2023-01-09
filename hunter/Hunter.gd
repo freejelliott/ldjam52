@@ -90,7 +90,8 @@ func _on_Area2D_area_entered(other_area:Area2D) -> void:
             var basket = other_area.get_parent()
             if basket.held_vegetable == null:
                 return
-            player.lose_basket(basket)
+            basket.held_vegetable = null
+            #player.lose_basket(basket)
             start_eating()
 
 

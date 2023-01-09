@@ -16,15 +16,7 @@ var follow_target: Node2D
 func set_follow_target(target):
     follow_target = target
 
-func _physics_process(delta: float) -> void:
-    if follow_target:
-        var velocity = follow_target.position - position
-
-        var direction = velocity.normalized()
-
-        if velocity.length() > follow_distance:
-            position += (velocity - direction * follow_distance) * speed * delta
-
+func _process(delta: float) -> void:
     match held_vegetable:
         Vegetable.VegetableType.Tomato:
             sprite.animation = 'Tomato'
@@ -34,6 +26,15 @@ func _physics_process(delta: float) -> void:
             sprite.animation = 'Carrot'
         _:
             sprite.animation = 'None'
+
+func _physics_process(delta: float) -> void:
+    if follow_target:
+        var velocity = follow_target.position - position
+
+        var direction = velocity.normalized()
+
+        if velocity.length() > follow_distance:
+            position += (velocity - direction * follow_distance) * speed * delta
 
 func destroy() -> void:
     follow_target = null

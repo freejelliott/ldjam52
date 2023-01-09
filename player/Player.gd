@@ -8,7 +8,7 @@ var Vegetable = preload('res://vegetable/Vegetable.gd')
 var baskets: Array = []
 var held_vegetable = null
 
-export var speed = 500#150
+export var speed = 500#150 # TODO: change back
 
 export var boot_bonus_speed = 50
 
