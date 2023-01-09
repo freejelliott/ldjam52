@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/single child.png-8d75498b787eed57913292eb0c9247c2.stex"
+path="res://.import/Cover1.png-bd1eccab6b037ab03b2ee6813671a8be.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://single child.png"
-dest_files=[ "res://.import/single child.png-8d75498b787eed57913292eb0c9247c2.stex" ]
+source_file="res://Cover1.png"
+dest_files=[ "res://.import/Cover1.png-bd1eccab6b037ab03b2ee6813671a8be.stex" ]
 
 [params]
 

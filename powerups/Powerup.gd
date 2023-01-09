@@ -10,7 +10,7 @@ enum PowerupType {
 
 export(PowerupType) var powerup_type
 
-onready var sprite: Sprite = $Sprite
+onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var area: Area2D = $Area2D
 
 func _init() -> void:
@@ -28,13 +28,13 @@ func _init() -> void:
 func _ready() -> void:
     match powerup_type:
         PowerupType.SpeedBoots:
-            sprite.modulate = Color.yellow
+            sprite.animation = 'boot'
         PowerupType.Basket:
-            sprite.modulate = Color.brown
+            sprite.animation = 'basket'
         PowerupType.ExtraLife:
-            sprite.modulate = Color.pink
+            sprite.animation = 'life'
         PowerupType.ExtraChildLife:
-            sprite.modulate = Color.lightblue
+            sprite.animation = 'child'
 
 func set_pickupable(b:bool) -> void:
     area.monitorable = b

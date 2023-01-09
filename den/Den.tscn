@@ -143,7 +143,6 @@ position = Vector2( 0, -6 )
 scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 23 )
 animation = "3"
-frame = 1
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="."]

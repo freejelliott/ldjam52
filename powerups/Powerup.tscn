@@ -1,13 +1,43 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://powerups/Powerup.gd" type="Script" id=1]
+[ext_resource path="res://Hearts V2.png" type="Texture" id=2]
+[ext_resource path="res://powerups/cuterboot.png" type="Texture" id=3]
+[ext_resource path="res://basket/basket.png" type="Texture" id=4]
+[ext_resource path="res://powerups/single child.png" type="Texture" id=5]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 1 )
-colors = PoolColorArray( 1, 1, 1, 1 )
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 1424, 1298 )
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 1424, 1298 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "basket",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "boot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "child",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "life",
+"speed": 5.0
+} ]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 32.0156
@@ -15,8 +45,10 @@ radius = 32.0156
 [node name="Powerup" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.05, 0.05 )
+frames = SubResource( 8 )
+animation = "life"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 64
