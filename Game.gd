@@ -11,6 +11,7 @@ onready var game_over = $Menus/GameOver
 
 onready var play_screen = $PlayScreen
 onready var hud = $PlayScreen/HUD
+onready var player = $PlayScreen/Player
 
 onready var spawn_start : Vector2 = $PlayScreen/VegetableSpawnTopLeft.position
 onready var spawn_end : Vector2 = $PlayScreen/VegetableSpawnBottomRight.position
@@ -30,18 +31,17 @@ func _ready() -> void:
 
 
 func _on_player_no_health() -> void:
+    yield(player.die(), "completed")
     play_screen.get_tree().paused = true
     hud.visible = false
     game_over.reason.text = 'You died.'
     game_over.visible = true
-    #TODO: show the score
 
 func _on_Den_no_lives() -> void:
     play_screen.get_tree().paused = true
     hud.visible = false
     game_over.reason.text = 'Your children all died.'
     game_over.visible = true
-    #TODO: show the score
 
 func _on_VegetableSpawnTimer_timeout() -> void:
     var existing_vegetables = get_tree().get_nodes_in_group('vegetables')

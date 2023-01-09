@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://player/test sprite sheet.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -192,6 +192,22 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=31]
+resource_name = "death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 16
 script = ExtResource( 2 )
@@ -208,7 +224,6 @@ smoothing_enabled = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
-frame = 2
 playing = true
 
 [node name="VegetableSprite" type="AnimatedSprite" parent="."]
@@ -230,6 +245,9 @@ one_shot = true
 [node name="BlinkAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 29 )
 anims/blink = SubResource( 30 )
+
+[node name="DeathAnimation" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 31 )
 
 [connection signal="invincibility_ended" from="." to="." method="_on_Player_invincibility_ended"]
 [connection signal="invincibility_started" from="." to="." method="_on_Player_invincibility_started"]

@@ -14,7 +14,8 @@ export var boot_bonus_speed = 50
 
 onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var vegetable_sprite: AnimatedSprite = $VegetableSprite
-onready var animation:= $BlinkAnimation
+onready var blink_animation: AnimationPlayer = $BlinkAnimation
+onready var death_animation: AnimationPlayer = $DeathAnimation
 
 # Invincibility stuff
 var invincible = false setget set_invincible
@@ -24,6 +25,9 @@ signal invincibility_started
 signal invincibility_ended
 
 func _physics_process(delta: float) -> void:
+    if PlayerStats.health == 0:
+        return
+
     var velocity = Vector2.ZERO
     if Input.is_action_pressed('move_down'):
         velocity.y = 1
@@ -86,7 +90,7 @@ func set_held_vegetable(vegetable) -> void:
 func update_held_sprite() -> void:
     match held_vegetable:
         Vegetable.VegetableType.Potato:
-            vegetable_sprite.animation = 'Potato'
+            vegetable_sprite.blink_animation = 'Potato'
         Vegetable.VegetableType.Tomato:
             vegetable_sprite.animation = 'Tomato'
         Vegetable.VegetableType.Carrot:
@@ -134,6 +138,11 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
             spawn_basket()
         powerup.queue_free()
 
+func die() -> void:
+    blink_animation.stop()
+    death_animation.play('death')
+    yield(death_animation, 'animation_finished')
+
 # Invincibility functionality
 
 func set_invincible(value):
@@ -144,9 +153,11 @@ func set_invincible(value):
         emit_signal("invincibility_ended")
 
 func start_invincibility(duration):
+    if PlayerStats.health <= 0:
+        return
     self.invincible = true
     timer.start(duration)
-    animation.play("blink")
+    blink_animation.play("blink")
 
 func _on_InvinciblityTimer_timeout():
     self.invincible = false
@@ -158,4 +169,4 @@ func _on_Player_invincibility_started():
 func _on_Player_invincibility_ended():
     print("Invincibility ended")
     area.monitorable = true
-    animation.stop(true)
+    blink_animation.stop(true)

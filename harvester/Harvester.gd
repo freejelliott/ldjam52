@@ -77,7 +77,6 @@ func _on_Area2D_area_entered(area:Area2D) -> void:
     if area.collision_layer == 1:
         # Player
         stats.health -= 1
-        # TODO: invincibility frames
         player.start_invincibility(3)
     elif area.collision_layer == 1 << 1:
         # Vegetable on ground
