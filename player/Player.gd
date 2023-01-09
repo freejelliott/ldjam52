@@ -104,6 +104,11 @@ func _physics_process(delta: float) -> void:
         velocity.x = 1
     if Input.is_action_pressed('move_up'):
         velocity.y = -1
+    if Input.is_action_pressed('click'):
+        var mouse_pos = get_viewport().get_mouse_position()
+        mouse_pos.x -= get_viewport_rect().size.x/2
+        mouse_pos.y -= get_viewport_rect().size.y/2
+        velocity = mouse_pos
 
     velocity = velocity.normalized()
 
