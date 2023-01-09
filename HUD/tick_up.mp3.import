@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tick_up.mp3-a746c2c69eb10d07b4864ebca1f71c7e.mp3str"
+
+[deps]
+
+source_file="res://HUD/tick_up.mp3"
+dest_files=[ "res://.import/tick_up.mp3-a746c2c69eb10d07b4864ebca1f71c7e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

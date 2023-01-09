@@ -18,6 +18,7 @@ onready var particles: Particles2D = $Particles2D
 onready var powerup_position: Position2D = $PowerupPosition
 onready var tween: Tween = $Tween
 onready var hooray_audio = $HooraySound
+onready var fail_audio = $FailSound
 
 export var max_lives = 3
 
@@ -53,6 +54,7 @@ func cancel_request() -> void:
 
 func _on_RequestTimer_timeout() -> void:
     print('Den request timed out')
+    fail_audio.play()
     lives -= 1
     # TODO: show lives as number of children in the den.
     health_bar.text = 'Lives: %d' % lives

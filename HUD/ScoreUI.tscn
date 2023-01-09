@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD/ScoreUI.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://menus/ui.tres" type="Theme" id=3]
+[ext_resource path="res://HUD/tick_up.mp3" type="AudioStream" id=4]
+[ext_resource path="res://HUD/whoosh.mp3" type="AudioStream" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -48,6 +50,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../WhooshSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( -0.1, 1.7, 3.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [node name="ScoreUI" type="Control"]
 anchor_right = 1.0
@@ -71,10 +85,10 @@ curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="StarPath"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 453.253, 52.1903 )
-rotation = 2.91059
+position = Vector2( 129.519, 485.724 )
+rotation = 1.0104
 scale = Vector2( 1e-05, 1e-05 )
-offset = 523.806
+offset = 1144.57
 
 [node name="Star" type="Sprite" parent="StarPath/PathFollow2D"]
 scale = Vector2( 0.7, 0.7 )
@@ -82,3 +96,11 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StarPath/PathFollow2D"]
 anims/star = SubResource( 2 )
+
+[node name="WhooshSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = 24.0
+
+[node name="TickUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = 10.245

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://menus/ui.tres" type="Theme" id=6]
 [ext_resource path="res://menus/Abalone Smile.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://den/hooray.mp3" type="AudioStream" id=8]
+[ext_resource path="res://den/fail.mp3" type="AudioStream" id=9]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.450262 )
@@ -244,6 +245,11 @@ autostart = true
 [node name="HooraySound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 volume_db = 4.37
+attenuation = 1.68179
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = 8.095
 attenuation = 1.68179
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

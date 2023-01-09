@@ -225,7 +225,7 @@ smoothing_enabled = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
-frame = 5
+frame = 3
 playing = true
 
 [node name="VegetableSprite" type="AnimatedSprite" parent="."]
