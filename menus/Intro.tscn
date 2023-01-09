@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://menus/ui.tres" type="Theme" id=1]
 [ext_resource path="res://menus/Intro.gd" type="Script" id=2]
@@ -55,9 +55,25 @@ tracks/3/keys = {
 "values": [ 1.0 ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "continue"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Continue:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=1]
 resource_name = "text_scroll"
-length = 10.5
+length = 11.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Text1:percent_visible")
 tracks/0/interp = 1
@@ -65,10 +81,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 2.5, 11.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 1.0 ]
+"values": [ 0.0, 0.0, 1.0, 1.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Text2:percent_visible")
@@ -77,10 +93,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 4, 7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 4, 7, 11.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 1.0 ]
+"values": [ 0.0, 0.0, 1.0, 1.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Text3:percent_visible")
@@ -89,10 +105,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 8.5, 10.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 8.5, 10.5, 11.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 1.0 ]
+"values": [ 0.0, 0.0, 1.0, 1.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../AudioStreamPlayer:playing")
@@ -101,10 +117,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5, 2.5, 4, 7, 8.5, 10.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 2.5, 4, 7, 8.5, 10.5, 11.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false, true, false, true, false ]
+"values": [ false, true, false, true, false, true, false, false ]
 }
 
 [node name="Intro" type="Control"]
@@ -144,6 +160,19 @@ margin_bottom = 873.0
 text = "But make sure you avoid the farmer's machines and dogs..."
 autowrap = true
 
+[node name="Continue" type="Label" parent="Panel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -546.0
+margin_top = -126.0
+margin_right = -10.0
+margin_bottom = -44.0
+text = "Click to continue"
+autowrap = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 1.0
@@ -151,6 +180,7 @@ volume_db = 1.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Panel")
 anims/RESET = SubResource( 2 )
+anims/continue = SubResource( 3 )
 anims/text_scroll = SubResource( 1 )
 
 [connection signal="gui_input" from="." to="." method="_on_Intro_gui_input"]
