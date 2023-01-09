@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HealthUI.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://doghouse-03.png" type="Texture" id=17]
 [ext_resource path="res://doghouse-02.png" type="Texture" id=18]
 [ext_resource path="res://random filler rocks.png" type="Texture" id=19]
+[ext_resource path="res://HUD/PowerupUI.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 1866.25, 68.25 )
@@ -319,6 +320,8 @@ autostart = true
 [node name="HealthUI" parent="PlayScreen/HUD" instance=ExtResource( 2 )]
 
 [node name="ScoreUI" parent="PlayScreen/HUD" instance=ExtResource( 15 )]
+
+[node name="PowerupUI" parent="PlayScreen/HUD" instance=ExtResource( 20 )]
 
 [node name="VegetableSpawnTopLeft" type="Position2D" parent="PlayScreen"]
 position = Vector2( 504, 464 )
