@@ -177,6 +177,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=30]
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:modulate")
@@ -207,6 +208,7 @@ smoothing_enabled = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 
 [node name="VegetableSprite" type="AnimatedSprite" parent="."]

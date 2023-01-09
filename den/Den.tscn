@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://den/Den.gd" type="Script" id=1]
 [ext_resource path="res://vegetable/tomato.png" type="Texture" id=2]
@@ -24,17 +24,24 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 gradient = SubResource( 12 )
 
 [sub_resource type="Curve" id=14]
-min_value = -1.0
-_data = [ Vector2( 0, 1 ), 0.0, -0.203877, 0, 0, Vector2( 0.25082, -0.270455 ), -0.222808, -0.222808, 0, 0, Vector2( 0.501639, 0.220455 ), -0.179714, -0.179714, 0, 0, Vector2( 0.752459, -0.161364 ), 0.032241, 0.032241, 0, 0, Vector2( 0.993443, 0.0386364 ), -0.36166, 0.0, 0, 0 ]
+min_value = -0.2
+max_value = 0.2
+_data = [ Vector2( 0, 0.182727 ), 0.0, -0.203877, 0, 0, Vector2( 0.25082, -0.148182 ), -0.222808, -0.222808, 0, 0, Vector2( 0.501639, 0.142727 ), -0.179714, -0.179714, 0, 0, Vector2( 0.747541, -0.0645455 ), 0.032241, 0.032241, 0, 0, Vector2( 1, -0.00636363 ), -0.36166, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=15]
 curve = SubResource( 14 )
+
+[sub_resource type="Curve" id=19]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.476136 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
 
 [sub_resource type="ParticlesMaterial" id=16]
 lifetime_randomness = 0.3
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
-spread = 35.0
+spread = 50.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 150.0
 initial_velocity_random = 0.5
@@ -43,12 +50,13 @@ orbit_velocity_random = 0.0
 orbit_velocity_curve = SubResource( 15 )
 damping = 100.0
 damping_random = 0.21
-scale = 0.01
+scale = 0.02
 scale_random = 0.01
+scale_curve = SubResource( 20 )
 color = Color( 1, 0.2, 0.2, 1 )
 color_ramp = SubResource( 13 )
-hue_variation = 0.03
-hue_variation_random = 1.0
+hue_variation = 0.05
+hue_variation_random = 0.5
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 65.0
@@ -109,10 +117,10 @@ texture = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -25 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 4, 4 )
 emitting = false
-amount = 10
-lifetime = 1.5
+amount = 5
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 16 )
@@ -129,6 +137,7 @@ shape = SubResource( 4 )
 position = Vector2( 0, 137 )
 
 [node name="Request" type="PanelContainer" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
