@@ -39,7 +39,11 @@ func _physics_process(delta: float) -> void:
 
     velocity = velocity.normalized()
 
-    sprite.playing = velocity != Vector2.ZERO
+    if sprite.animation != 'hurt':
+        if velocity == Vector2.ZERO:
+            sprite.animation = 'idle'
+        else:
+            sprite.animation = 'default'
 
     if velocity.x:
         if velocity.x > 0:
@@ -148,6 +152,9 @@ func hurt() -> void:
         PlayerStats.health -= 1
         start_invincibility(3)
         audio.play()
+        sprite.animation = 'hurt'
+        yield(sprite, 'animation_finished')
+        sprite.animation = 'default'
 
 func die() -> void:
     blink_animation.stop()

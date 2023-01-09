@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/heart3.png-4dcb0b37a0b5006d2b2e206e23ee4470.stex"
+path="res://.import/gameoversad.png-8074d0ae18d0e6a955a1a0d1e01b890d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://heart3.png"
-dest_files=[ "res://.import/heart3.png-4dcb0b37a0b5006d2b2e206e23ee4470.stex" ]
+source_file="res://menus/gameoversad.png"
+dest_files=[ "res://.import/gameoversad.png-8074d0ae18d0e6a955a1a0d1e01b890d.stex" ]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://HUD/HealthUI.gd" type="Script" id=1]
-[ext_resource path="res://heart1.png" type="Texture" id=2]
-[ext_resource path="res://heart3.png" type="Texture" id=3]
-[ext_resource path="res://heart2.png" type="Texture" id=4]
+[ext_resource path="res://HUD/heart1.png" type="Texture" id=2]
+[ext_resource path="res://HUD/heart3.png" type="Texture" id=3]
+[ext_resource path="res://HUD/heart2.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0 )

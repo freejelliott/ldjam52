@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HealthUI.tscn" type="PackedScene" id=2]
@@ -22,17 +22,47 @@
 [ext_resource path="res://HUD/PowerupUI.tscn" type="PackedScene" id=20]
 [ext_resource path="res://vegetable/Vegetable.tscn" type="PackedScene" id=21]
 
+[sub_resource type="TileSet" id=12]
+0/name = "vertical fence.png 0"
+0/texture = ExtResource( 16 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( -3, -3, 2792, 5591 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "fence across.png 1"
+1/texture = ExtResource( 9 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 2, 2, 12505, 1758 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 1866.25, 68.25 )
+extents = Vector2( 1834.25, 68.25 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 82.75, 1389.5 )
+extents = Vector2( 82.75, 1548.5 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 79.5, 1389.5 )
+extents = Vector2( 79.5, 1545.5 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 1867.75, 68.75 )
+extents = Vector2( 1837.25, 68.75 )
 
 [sub_resource type="Curve2D" id=5]
 _data = {
@@ -104,69 +134,77 @@ visible = false
 [node name="Field" type="Node2D" parent="PlayScreen"]
 
 [node name="Sprite" type="Sprite" parent="PlayScreen/Field"]
-position = Vector2( 1900, 1599 )
+position = Vector2( 1877, 1712 )
 texture = ExtResource( 10 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 5060 )
+region_rect = Rect2( 0, 0, 6000, 5060 )
 
 [node name="TopFence" type="StaticBody2D" parent="PlayScreen/Field"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="Sprite" type="Sprite" parent="PlayScreen/Field/TopFence"]
-position = Vector2( 1900, 218 )
+[node name="TileMap" type="TileMap" parent="PlayScreen/Field/TopFence"]
+position = Vector2( -1192, 1488 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 26, 182, 37659, 1572 )
+tile_set = SubResource( 12 )
+cell_size = Vector2( 12231, 5100 )
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -196607, 1, 0, -196606, 1, 0, -196605, 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayScreen/Field/TopFence"]
-position = Vector2( 1894.75, 208.75 )
+position = Vector2( 1862.75, 208.75 )
 shape = SubResource( 8 )
 
 [node name="LeftFence" type="StaticBody2D" parent="PlayScreen/Field"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="Sprite" type="Sprite" parent="PlayScreen/Field/LeftFence"]
-position = Vector2( 103, 1602 )
+[node name="TileMap" type="TileMap" parent="PlayScreen/Field/LeftFence"]
+position = Vector2( -648, 1248 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 16 )
-region_enabled = true
-region_rect = Rect2( 28, 12, 2732, 27905 )
+tile_set = SubResource( 12 )
+cell_size = Vector2( 5000, 5100 )
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayScreen/Field/LeftFence"]
-position = Vector2( 97.25, 1596.5 )
+position = Vector2( 97.25, 1755.5 )
 shape = SubResource( 9 )
 
 [node name="RightFence" type="StaticBody2D" parent="PlayScreen/Field"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="Sprite" type="Sprite" parent="PlayScreen/Field/RightFence"]
-position = Vector2( 3691, 1604 )
+[node name="TileMap" type="TileMap" parent="PlayScreen/Field/RightFence"]
+position = Vector2( 2888, 1248 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 16 )
-region_enabled = true
-region_rect = Rect2( 28, 12, 2732, 27905 )
+tile_set = SubResource( 12 )
+cell_size = Vector2( 5000, 5100 )
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayScreen/Field/RightFence"]
-position = Vector2( 3686.5, 1598.5 )
+position = Vector2( 3630.5, 1754.5 )
 shape = SubResource( 10 )
 
 [node name="BottomFence" type="StaticBody2D" parent="PlayScreen/Field"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="Sprite" type="Sprite" parent="PlayScreen/Field/BottomFence"]
-position = Vector2( 1900, 3006 )
+[node name="TileMap" type="TileMap" parent="PlayScreen/Field/BottomFence"]
+position = Vector2( -1192, 4592 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 26, 182, 37659, 1572 )
+tile_set = SubResource( 12 )
+cell_size = Vector2( 12231, 5100 )
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -196607, 1, 0, -196606, 1, 0, -196605, 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayScreen/Field/BottomFence"]
-position = Vector2( 1894.25, 2996.25 )
+position = Vector2( 1863.75, 3316.25 )
 shape = SubResource( 11 )
 
 [node name="Doghouse" type="Sprite" parent="PlayScreen/Field"]
@@ -175,12 +213,12 @@ scale = Vector2( -0.5, 0.5 )
 texture = ExtResource( 7 )
 
 [node name="Doghouse2" type="Sprite" parent="PlayScreen/Field"]
-position = Vector2( 3358, 537 )
+position = Vector2( 3310, 537 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 18 )
 
 [node name="Doghouse3" type="Sprite" parent="PlayScreen/Field"]
-position = Vector2( 412, 2520 )
+position = Vector2( 412, 2864 )
 scale = Vector2( -0.5, 0.5 )
 texture = ExtResource( 17 )
 
@@ -190,9 +228,10 @@ scale = Vector2( -0.5, 0.5 )
 texture = ExtResource( 19 )
 
 [node name="Rocks2" type="Sprite" parent="PlayScreen/Field"]
-position = Vector2( 2210, 1704 )
+position = Vector2( 1475.86, 2952.7 )
 scale = Vector2( -0.5, 0.5 )
 texture = ExtResource( 19 )
+offset = Vector2( -1468.29, -2497.4 )
 
 [node name="Rocks3" type="Sprite" parent="PlayScreen/Field"]
 position = Vector2( 3082, 2520 )
@@ -214,11 +253,17 @@ position = Vector2( 1530, 1004 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 19 )
 
+[node name="Rocks7" type="Sprite" parent="PlayScreen/Field"]
+position = Vector2( 1408, 4248 )
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 19 )
+offset = Vector2( -1468.29, -2497.4 )
+
 [node name="Player" parent="PlayScreen" instance=ExtResource( 1 )]
-position = Vector2( 2529, 2390 )
+position = Vector2( 2385, 2654 )
 
 [node name="Den" parent="PlayScreen" instance=ExtResource( 3 )]
-position = Vector2( 2752, 2282 )
+position = Vector2( 2688, 2514 )
 
 [node name="Harvester" parent="PlayScreen" instance=ExtResource( 4 )]
 position = Vector2( 2220.62, 2348.06 )
@@ -226,8 +271,8 @@ player_path = NodePath("../Player")
 path_path = NodePath("../HarvesterPath")
 
 [node name="HarvesterPath" type="Path2D" parent="PlayScreen"]
-position = Vector2( 55.0264, 275.092 )
-scale = Vector2( 1.02157, 0.847712 )
+position = Vector2( 73.6492, 251.979 )
+scale = Vector2( 0.988015, 0.945236 )
 curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="PlayScreen/HarvesterPath"]
@@ -246,9 +291,9 @@ player_path = NodePath("../Player")
 path_path = NodePath("../HarvesterPath2")
 
 [node name="HarvesterPath2" type="Path2D" parent="PlayScreen"]
-position = Vector2( 257.922, 3088.59 )
+position = Vector2( 262.292, 3425.77 )
 rotation = -1.57108
-scale = Vector2( 0.823376, 1.0415 )
+scale = Vector2( 0.933638, 1.02347 )
 curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="PlayScreen/HarvesterPath2"]
@@ -280,13 +325,13 @@ monitoring = false
 shape = SubResource( 4 )
 
 [node name="Hunter2" parent="PlayScreen" instance=ExtResource( 5 )]
-position = Vector2( 480, 2822 )
+position = Vector2( 536, 3142 )
 speed = 100
 player_path = NodePath("../Player")
 home_path = NodePath("../HunterHome2")
 
 [node name="HunterHome2" type="Position2D" parent="PlayScreen"]
-position = Vector2( 480, 2822 )
+position = Vector2( 536, 3142 )
 
 [node name="Area2D" type="Area2D" parent="PlayScreen/HunterHome2"]
 collision_layer = 32
@@ -297,13 +342,13 @@ monitoring = false
 shape = SubResource( 4 )
 
 [node name="Hunter3" parent="PlayScreen" instance=ExtResource( 5 )]
-position = Vector2( 3349, 866 )
+position = Vector2( 3301, 866 )
 speed = 100
 player_path = NodePath("../Player")
 home_path = NodePath("../HunterHome3")
 
 [node name="HunterHome3" type="Position2D" parent="PlayScreen"]
-position = Vector2( 3349, 866 )
+position = Vector2( 3301, 866 )
 
 [node name="Area2D" type="Area2D" parent="PlayScreen/HunterHome3"]
 collision_layer = 32
@@ -331,7 +376,7 @@ position = Vector2( 504, 464 )
 position = Vector2( 3286, 2732 )
 
 [node name="Vegetable" parent="PlayScreen" instance=ExtResource( 21 )]
-position = Vector2( 2269, 2013 )
+position = Vector2( 2269, 2261 )
 vegetable_type = 1
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
